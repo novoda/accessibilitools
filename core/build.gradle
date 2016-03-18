@@ -13,7 +13,7 @@ android {
 
 publish {
     userOrg = 'novoda'
-    repoName = 'maven-private'
+    repoName = 'maven'
     groupId = 'com.novoda'
     artifactId = 'accessibilitools'
     version = project.version
