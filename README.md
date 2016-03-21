@@ -7,10 +7,19 @@ EZ tools to help make your app accessible.
 
 This is a library of utility classes and methods to help you develop accessible Android apps.
 
-## Adding to project
+## Adding to your project
 
-accessibilitools is currently in the process of being published to JCenter.
+To start using this library, add these lines to the `build.gradle` of your project:
 
+```groovy
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile 'com.novoda:accessibilitools:1.0.0'
+}
+```
 
 ## Simple usage
 
