@@ -1,24 +1,22 @@
 package com.novoda.accessibility.captioning;
 
 import android.content.Context;
-
-import com.novoda.support.DeviceAndroidVersion;
+import android.os.Build;
 
 public class CaptionManagerFactory {
 
-    private final DeviceAndroidVersion deviceAndroidVersion;
+    private final int buildVersion;
 
     public static CaptionManagerFactory newInstance() {
-        DeviceAndroidVersion deviceAndroidVersion = DeviceAndroidVersion.newInstance();
-        return new CaptionManagerFactory(deviceAndroidVersion);
+        return new CaptionManagerFactory(Build.VERSION.SDK_INT);
     }
 
-    CaptionManagerFactory(DeviceAndroidVersion deviceAndroidVersion) {
-        this.deviceAndroidVersion = deviceAndroidVersion;
+    CaptionManagerFactory(int buildVersion) {
+        this.buildVersion = buildVersion;
     }
 
     public CaptionManager getCaptionManager(Context context) {
-        if (deviceAndroidVersion.is19KitKatOrOver()) {
+        if (buildVersion >= Build.VERSION_CODES.KITKAT) {
             return ClosedCaptionManager.newInstance(context);
         } else {
             return ClosedCaptionManagerCompat.newInstance();
