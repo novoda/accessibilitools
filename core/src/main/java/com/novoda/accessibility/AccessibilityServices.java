@@ -39,6 +39,12 @@ public final class AccessibilityServices {
         return accessibilityManager.getEnabledAccessibilityServiceList(feedbackTypeFlags);
     }
 
+    /**
+     * Reports if video captioning is enabled on the device.
+     *
+     * Please note that closed captioning is only available on devices running KIT KAT or above. When running on a version lower
+     * than KIT KAT this method returns false.
+     */
     public boolean isClosedCaptioningEnabled() {
         return captionManager.isClosedCaptioningEnabled();
     }
