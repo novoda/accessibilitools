@@ -9,4 +9,9 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content" />
 
+  <TextView
+    android:id="@+id/closedcaptioning_status"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" />
+
 </LinearLayout>

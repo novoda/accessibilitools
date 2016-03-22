@@ -10,6 +10,7 @@ public class AccessibilityServicesActivity extends AppCompatActivity {
 
     private AccessibilityServices accessibilityServices;
     private TextView talkbackStatus;
+    private TextView closedCaptioningStatus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,15 +19,23 @@ public class AccessibilityServicesActivity extends AppCompatActivity {
 
         accessibilityServices = AccessibilityServices.newInstance(this);
         talkbackStatus = ((TextView) findViewById(R.id.talkback_status));
+        closedCaptioningStatus = ((TextView) findViewById(R.id.closedcaptioning_status));
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+
         if (accessibilityServices.isSpokenFeedbackEnabled()) {
             talkbackStatus.setText("Spoken feedback is enabled");
         } else {
             talkbackStatus.setText("Spoken feedback is not enabled");
+        }
+
+        if (accessibilityServices.isClosedCaptioningEnabled()) {
+            closedCaptioningStatus.setText("Closed captioning is enabled");
+        } else {
+            closedCaptioningStatus.setText("Closed captioning is not enabled");
         }
     }
 
