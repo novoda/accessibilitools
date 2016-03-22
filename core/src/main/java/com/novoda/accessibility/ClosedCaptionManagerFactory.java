@@ -5,9 +5,9 @@ import android.content.Context;
 import android.os.Build;
 import android.view.accessibility.CaptioningManager;
 
-public class ClosedCaptionManagerCompat {
+public class ClosedCaptionManagerFactory {
 
-    public static CaptionManager newInstance(Context context) {
+    public static CaptionManager createCaptionManager(Context context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             return ClosedCaptionManager.newInstance(context);
         } else {
@@ -15,7 +15,7 @@ public class ClosedCaptionManagerCompat {
         }
     }
 
-    private static class ClosedCaptionManager implements CaptionManager {
+    private static final class ClosedCaptionManager implements CaptionManager {
 
         private final CaptioningManager captioningManager;
 
@@ -57,5 +57,5 @@ public class ClosedCaptionManagerCompat {
         boolean isClosedCaptioningEnabled();
 
     }
-    
+
 }
