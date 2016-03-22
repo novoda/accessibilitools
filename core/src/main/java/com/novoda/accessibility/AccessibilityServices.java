@@ -2,6 +2,7 @@ package com.novoda.accessibility;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.content.Context;
+import android.support.annotation.VisibleForTesting;
 import android.view.accessibility.AccessibilityManager;
 
 import java.util.List;
@@ -15,7 +16,8 @@ public final class AccessibilityServices {
         return new AccessibilityServices(accessibilityManager);
     }
 
-    private AccessibilityServices(AccessibilityManager accessibilityManager) {
+    @VisibleForTesting
+    AccessibilityServices(AccessibilityManager accessibilityManager) {
         this.accessibilityManager = accessibilityManager;
     }
 
