@@ -4,8 +4,7 @@ import android.accessibilityservice.AccessibilityServiceInfo;
 import android.content.Context;
 import android.view.accessibility.AccessibilityManager;
 
-import com.novoda.accessibility.captioning.CaptionManager;
-import com.novoda.accessibility.captioning.CaptionManagerFactory;
+import com.novoda.accessibility.ClosedCaptionManagerCompat.CaptionManager;
 
 import java.util.List;
 
@@ -16,7 +15,7 @@ public final class AccessibilityServices {
 
     public static AccessibilityServices newInstance(Context context) {
         AccessibilityManager accessibilityManager = (AccessibilityManager) context.getSystemService(Context.ACCESSIBILITY_SERVICE);
-        CaptionManager captionManager = CaptionManagerFactory.newInstance().getCaptionManager(context);
+        CaptionManager captionManager = ClosedCaptionManagerCompat.newInstance(context);
         return new AccessibilityServices(accessibilityManager, captionManager);
     }
 
@@ -41,9 +40,6 @@ public final class AccessibilityServices {
 
     /**
      * Reports if video captioning is enabled on the device.
-     *
-     * Please note that closed captioning is only available on devices running KIT KAT or above. When running on a version lower
-     * than KIT KAT this method returns false.
      */
     public boolean isClosedCaptioningEnabled() {
         return captionManager.isClosedCaptioningEnabled();
