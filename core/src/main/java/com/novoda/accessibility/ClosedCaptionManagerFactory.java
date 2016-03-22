@@ -34,6 +34,7 @@ public class ClosedCaptionManagerFactory {
         public boolean isClosedCaptioningEnabled() {
             return captioningManager.isEnabled();
         }
+
     }
 
     private static class DummyClosedCaptionManager implements CaptionManager {
@@ -50,6 +51,7 @@ public class ClosedCaptionManagerFactory {
         public boolean isClosedCaptioningEnabled() {
             return false;
         }
+
     }
 
     interface CaptionManager {
