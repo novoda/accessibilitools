@@ -26,7 +26,7 @@ public final class AccessibilityServices {
 
     /**
      * Reports if any services offering spoken feedback are enabled.
-     *
+     * <p/>
      * Be aware it will return true when TalkBack is enabled, even if it's suspended.
      */
     public boolean isSpokenFeedbackEnabled() {
@@ -44,4 +44,5 @@ public final class AccessibilityServices {
     public boolean isClosedCaptioningEnabled() {
         return captionManager.isClosedCaptioningEnabled();
     }
+
 }
