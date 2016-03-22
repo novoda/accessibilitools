@@ -5,7 +5,7 @@ import android.content.Context;
 import android.os.Build;
 import android.view.accessibility.CaptioningManager;
 
-public class ClosedCaptionManagerFactory {
+class ClosedCaptionManagerFactory {
 
     public static CaptionManager createCaptionManager(Context context) {
         if (osSupportsNativeClosedCaptioning()) {
