@@ -9,7 +9,7 @@ import com.novoda.accessibility.ClosedCaptionManagerFactory.CaptionManager;
 
 import java.util.List;
 
-public final class AccessibilityServices {
+public class AccessibilityServices {
 
     private final AccessibilityManager accessibilityManager;
     private final CaptionManager captionManager;
