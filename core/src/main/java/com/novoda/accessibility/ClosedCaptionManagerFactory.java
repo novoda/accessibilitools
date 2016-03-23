@@ -8,15 +8,13 @@ import android.view.accessibility.CaptioningManager;
 class ClosedCaptionManagerFactory {
 
     public static CaptionManager createCaptionManager(Context context) {
-        if (osSupportsNativeClosedCaptioning()) {
+        AndroidVersion androidVersion = AndroidVersion.newInstance();
+
+        if (androidVersion.isKitKatOrHigher()) {
             return ClosedCaptionManager.newInstance(context);
         } else {
             return DummyClosedCaptionManager.newInstance();
         }
-    }
-
-    private static boolean osSupportsNativeClosedCaptioning() {
-        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
     }
 
     private static final class ClosedCaptionManager implements CaptionManager {
