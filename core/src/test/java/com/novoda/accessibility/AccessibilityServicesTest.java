@@ -13,7 +13,6 @@ import org.junit.Test;
 import org.mockito.Mock;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 
@@ -39,7 +38,8 @@ public class AccessibilityServicesTest {
     @Test
     public void whenAccessibilityServiceInfoListIsNotEmpty_thenSpokenFeedbackIsEnabled() {
         List<AccessibilityServiceInfo> serviceInfoList = Collections.singletonList(mockAccessibilityServiceInfo);
-        when(mockAccessibilityManager.getEnabledAccessibilityServiceList(anyInt())).thenReturn(serviceInfoList);
+        when(mockAccessibilityManager.getEnabledAccessibilityServiceList(AccessibilityServiceInfo.FEEDBACK_SPOKEN))
+                .thenReturn(serviceInfoList);
 
         boolean spokenFeedbackEnabled = accessibilityServices.isSpokenFeedbackEnabled();
 
