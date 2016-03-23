@@ -5,8 +5,6 @@ import android.content.Context;
 import android.support.annotation.VisibleForTesting;
 import android.view.accessibility.AccessibilityManager;
 
-import com.novoda.accessibility.ClosedCaptionManagerFactory.CaptionManager;
-
 import java.util.List;
 
 public final class AccessibilityServices {
@@ -15,8 +13,9 @@ public final class AccessibilityServices {
     private final CaptionManager captionManager;
 
     public static AccessibilityServices newInstance(Context context) {
+        ClosedCaptionManagerFactory closedCaptionManagerFactory = ClosedCaptionManagerFactory.newInstance();
         AccessibilityManager accessibilityManager = (AccessibilityManager) context.getSystemService(Context.ACCESSIBILITY_SERVICE);
-        CaptionManager captionManager = ClosedCaptionManagerFactory.createCaptionManager(context);
+        CaptionManager captionManager = closedCaptionManagerFactory.createCaptionManager(context);
         return new AccessibilityServices(accessibilityManager, captionManager);
     }
 
