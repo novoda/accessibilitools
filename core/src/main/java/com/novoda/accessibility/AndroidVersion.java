@@ -2,7 +2,7 @@ package com.novoda.accessibility;
 
 import android.os.Build;
 
-class AndroidVersion {
+final class AndroidVersion {
 
     private final int deviceVersion;
 
@@ -10,7 +10,7 @@ class AndroidVersion {
         return new AndroidVersion(Build.VERSION.SDK_INT);
     }
 
-    AndroidVersion(int deviceVersion) {
+    private AndroidVersion(int deviceVersion) {
         this.deviceVersion = deviceVersion;
     }
 
