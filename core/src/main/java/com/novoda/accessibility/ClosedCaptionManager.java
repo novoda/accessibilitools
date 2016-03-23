@@ -5,7 +5,7 @@ import android.content.Context;
 import android.os.Build;
 import android.view.accessibility.CaptioningManager;
 
-final class ClosedCaptionManager implements CaptionManager {
+class ClosedCaptionManager implements CaptionManager {
 
     private final CaptioningManager captioningManager;
 
