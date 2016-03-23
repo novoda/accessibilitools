@@ -22,7 +22,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.novoda:accessibilitools:1.0.0'
+    compile 'com.novoda:accessibilitools:1.1.0'
 }
 ```
 
