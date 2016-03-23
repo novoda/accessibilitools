@@ -3,6 +3,8 @@ package com.novoda.accessibility;
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.view.accessibility.AccessibilityManager;
 
+import com.novoda.accessibility.ClosedCaptionManagerFactory.CaptionManager;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -23,12 +25,15 @@ public class AccessibilityServicesTest {
     @Mock
     AccessibilityServiceInfo mockAccessibilityServiceInfo;
 
+    @Mock
+    CaptionManager mockCaptionManager;
+
     private AccessibilityServices accessibilityServices;
 
     @Before
     public void setUp() {
         initMocks(this);
-        accessibilityServices = new AccessibilityServices(mockAccessibilityManager);
+        accessibilityServices = new AccessibilityServices(mockAccessibilityManager, mockCaptionManager);
     }
 
     @Test
