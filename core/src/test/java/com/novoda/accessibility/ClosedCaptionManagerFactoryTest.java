@@ -5,10 +5,10 @@ import android.content.Context;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
+import static org.mockito.MockitoAnnotations.initMocks;
 
 public class ClosedCaptionManagerFactoryTest {
 
@@ -22,7 +22,7 @@ public class ClosedCaptionManagerFactoryTest {
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
+        initMocks(this);
         closedCaptionManagerFactory = new ClosedCaptionManagerFactory(mockAndroidVersion);
     }
 

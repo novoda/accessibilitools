@@ -7,9 +7,9 @@ import android.view.accessibility.CaptioningManager;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 
 import static org.mockito.Mockito.verify;
+import static org.mockito.MockitoAnnotations.initMocks;
 
 @TargetApi(Build.VERSION_CODES.KITKAT)
 public class ClosedCaptionManagerTest {
@@ -21,7 +21,7 @@ public class ClosedCaptionManagerTest {
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
+        initMocks(this);
         closedCaptionManager = new ClosedCaptionManager(mockCaptioningManager);
     }
 
