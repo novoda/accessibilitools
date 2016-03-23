@@ -2,6 +2,7 @@ package com.novoda.accessibility;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.content.Context;
+import android.support.annotation.VisibleForTesting;
 import android.view.accessibility.AccessibilityManager;
 
 import com.novoda.accessibility.ClosedCaptionManagerFactory.CaptionManager;
@@ -19,7 +20,8 @@ public final class AccessibilityServices {
         return new AccessibilityServices(accessibilityManager, captionManager);
     }
 
-    private AccessibilityServices(AccessibilityManager accessibilityManager, CaptionManager captionManager) {
+    @VisibleForTesting
+    AccessibilityServices(AccessibilityManager accessibilityManager, CaptionManager captionManager) {
         this.accessibilityManager = accessibilityManager;
         this.captionManager = captionManager;
     }
