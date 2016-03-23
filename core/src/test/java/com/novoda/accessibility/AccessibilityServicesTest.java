@@ -3,8 +3,6 @@ package com.novoda.accessibility;
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.view.accessibility.AccessibilityManager;
 
-import com.novoda.accessibility.ClosedCaptionManagerFactory.CaptionManager;
-
 import java.util.Collections;
 import java.util.List;
 
