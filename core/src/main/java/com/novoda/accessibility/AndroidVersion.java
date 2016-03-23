@@ -2,7 +2,7 @@ package com.novoda.accessibility;
 
 import android.os.Build;
 
-public class AndroidVersion {
+class AndroidVersion {
 
     private final int deviceVersion;
 
