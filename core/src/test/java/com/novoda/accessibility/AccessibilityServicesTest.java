@@ -46,4 +46,14 @@ public class AccessibilityServicesTest {
         assertThat(spokenFeedbackEnabled).isTrue();
     }
 
+    @Test
+    public void whenAccessibilityServiceInfoListIsEmpty_thenSpokenFeedbackIsDisabled() {
+        when(mockAccessibilityManager.getEnabledAccessibilityServiceList(AccessibilityServiceInfo.FEEDBACK_SPOKEN))
+                .thenReturn(Collections.<AccessibilityServiceInfo>emptyList());
+
+        boolean spokenFeedbackEnabled = accessibilityServices.isSpokenFeedbackEnabled();
+
+        assertThat(spokenFeedbackEnabled).isFalse();
+    }
+
 }
