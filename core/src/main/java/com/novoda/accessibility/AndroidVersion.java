@@ -6,7 +6,7 @@ public class AndroidVersion {
 
     private final int deviceVersion;
 
-    public static AndroidVersion newInstance() {
+    static AndroidVersion newInstance() {
         return new AndroidVersion(Build.VERSION.SDK_INT);
     }
 
