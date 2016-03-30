@@ -42,7 +42,7 @@ public class ActionsAlertDialogCreator {
                 }
         );
 
-        if (title != 0) {
+        if (title != NO_TITLE) {
             builder.setTitle(title);
         }
 
