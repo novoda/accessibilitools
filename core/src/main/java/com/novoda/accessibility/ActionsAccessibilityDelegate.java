@@ -18,24 +18,22 @@ public class ActionsAccessibilityDelegate extends AccessibilityDelegateCompat {
     private final Actions actions;
 
     @StringRes
-    private final int customClickLabel;
+    private int clickLabel = NO_CUSTOM_LABEL;
 
     @StringRes
-    private final int customLongClickLabel;
+    private int longClickLabel = NO_CUSTOM_LABEL;
 
     public ActionsAccessibilityDelegate(Resources resources, Actions actions) {
-        this(resources, actions, NO_CUSTOM_LABEL);
-    }
-
-    public ActionsAccessibilityDelegate(Resources resources, Actions actions, @StringRes int customClickLabel) {
-        this(resources, actions, customClickLabel, NO_CUSTOM_LABEL);
-    }
-
-    public ActionsAccessibilityDelegate(Resources resources, Actions actions, @StringRes int customClickLabel, @StringRes int customLongClickLabel) {
         this.resources = resources;
         this.actions = actions;
-        this.customClickLabel = customClickLabel;
-        this.customLongClickLabel = customLongClickLabel;
+    }
+
+    public void setClickLabel(@StringRes int clickLabel) {
+        this.clickLabel = clickLabel;
+    }
+
+    public void setLongClickLabel(@StringRes int longClickLabel) {
+        this.longClickLabel = longClickLabel;
     }
 
     @Override
@@ -51,20 +49,20 @@ public class ActionsAccessibilityDelegate extends AccessibilityDelegateCompat {
     }
 
     private void addCustomDescriptionForClickEventIfNecessary(View host, AccessibilityNodeInfoCompat info) {
-        if (!host.isClickable() || customClickLabel == NO_CUSTOM_LABEL) {
+        if (!host.isClickable() || clickLabel == NO_CUSTOM_LABEL) {
             return;
         }
 
-        String customClickLabelText = resources.getString(customClickLabel);
+        String customClickLabelText = resources.getString(clickLabel);
         info.addAction(new AccessibilityNodeInfoCompat.AccessibilityActionCompat(ACTION_CLICK, customClickLabelText));
     }
 
     private void addCustomDescriptionForLongClickEventIfNecessary(View host, AccessibilityNodeInfoCompat info) {
-        if (!host.isLongClickable() || customLongClickLabel == NO_CUSTOM_LABEL) {
+        if (!host.isLongClickable() || longClickLabel == NO_CUSTOM_LABEL) {
             return;
         }
 
-        String customLongClickLabelText = resources.getString(customLongClickLabel);
+        String customLongClickLabelText = resources.getString(longClickLabel);
         info.addAction(new AccessibilityNodeInfoCompat.AccessibilityActionCompat(ACTION_LONG_CLICK, customLongClickLabelText));
     }
 
