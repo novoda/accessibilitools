@@ -42,7 +42,7 @@ public class TweetView extends LinearLayout {
 
     public void display(final String tweet, final Listener listener) {
         final Actions actions = createActions(tweet, listener);
-        ViewCompat.setAccessibilityDelegate(this, new ActionsAccessibilityDelegate(getResources(), actions));
+        ViewCompat.setAccessibilityDelegate(this, new ActionsAccessibilityDelegate(getResources(), actions, R.string.tweet_actions_usage_hint));
 
         tweetTextView.setText(tweet);
 
