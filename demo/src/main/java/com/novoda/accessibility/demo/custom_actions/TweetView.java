@@ -53,7 +53,7 @@ public class TweetView extends LinearLayout {
     }
 
     private void setClickListenerToShowDialogFor(final Actions actions) {
-        setButtonsAsClickableFalseToFixErrorOnLollipopPlus();
+        setButtonsAsClickableFalseToFixBehaviorChangeOnLollipopPlus();
 
         setOnClickListener(
                 new OnClickListener() {
@@ -65,7 +65,7 @@ public class TweetView extends LinearLayout {
         );
     }
 
-    private void setButtonsAsClickableFalseToFixErrorOnLollipopPlus() {
+    private void setButtonsAsClickableFalseToFixBehaviorChangeOnLollipopPlus() {
         // https://code.google.com/p/android/issues/detail?id=205431
         replyButton.setClickable(false);
         retweetButton.setClickable(false);
