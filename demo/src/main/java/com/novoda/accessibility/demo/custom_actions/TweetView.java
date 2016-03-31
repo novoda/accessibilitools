@@ -4,7 +4,6 @@ import android.content.Context;
 import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -20,8 +19,8 @@ import java.util.Arrays;
 public class TweetView extends LinearLayout {
 
     private TextView tweetTextView;
-    private Button replyButton;
-    private Button retweetButton;
+    private View replyButton;
+    private View retweetButton;
     private AccessibilityServices services;
 
     public TweetView(Context context, AttributeSet attrs) {
@@ -36,8 +35,8 @@ public class TweetView extends LinearLayout {
 
         View.inflate(getContext(), R.layout.merge_tweet, this);
         tweetTextView = (TextView) findViewById(R.id.tweet_text);
-        replyButton = (Button) findViewById(R.id.tweet_button_reply);
-        retweetButton = (Button) findViewById(R.id.tweet_button_retweet);
+        replyButton = findViewById(R.id.tweet_button_reply);
+        retweetButton = findViewById(R.id.tweet_button_retweet);
     }
 
     public void display(final String tweet, final Listener listener) {
@@ -46,15 +45,38 @@ public class TweetView extends LinearLayout {
 
         tweetTextView.setText(tweet);
 
+        if (services.isSpokenFeedbackEnabled()) {
+            setClickListenerToShowDialogFor(actions);
+        } else {
+            setIndividualClickListeners(tweet, listener);
+        }
+    }
+
+    private void setClickListenerToShowDialogFor(final Actions actions) {
+        setButtonsAsClickableFalseToFixBehaviorChangeOnLollipopPlus();
+
         setOnClickListener(
                 new OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if (services.isSpokenFeedbackEnabled()) {
-                            showAlertDialogFor(actions);
-                        } else {
-                            listener.onClick(tweet);
-                        }
+                        showAlertDialogFor(actions);
+                    }
+                }
+        );
+    }
+
+    private void setButtonsAsClickableFalseToFixBehaviorChangeOnLollipopPlus() {
+        // https://code.google.com/p/android/issues/detail?id=205431
+        replyButton.setClickable(false);
+        retweetButton.setClickable(false);
+    }
+
+    private void setIndividualClickListeners(final String tweet, final Listener listener) {
+        setOnClickListener(
+                new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        listener.onClick(tweet);
                     }
                 }
         );
@@ -81,19 +103,22 @@ public class TweetView extends LinearLayout {
     private Actions createActions(final String tweet, final Listener listener) {
         return new Actions(
                 Arrays.asList(
-                        new Action(R.id.tweet_action_open, R.string.tweet_action_open, new Runnable() {
+                        new Action(
+                                R.id.tweet_action_open, R.string.tweet_action_open, new Runnable() {
                             @Override
                             public void run() {
                                 listener.onClick(tweet);
                             }
                         }),
-                        new Action(R.id.tweet_action_reply, R.string.tweet_action_reply, new Runnable() {
+                        new Action(
+                                R.id.tweet_action_reply, R.string.tweet_action_reply, new Runnable() {
                             @Override
                             public void run() {
                                 listener.onClickReply(tweet);
                             }
                         }),
-                        new Action(R.id.tweet_action_retweet, R.string.tweet_action_retweet, new Runnable() {
+                        new Action(
+                                R.id.tweet_action_retweet, R.string.tweet_action_retweet, new Runnable() {
                             @Override
                             public void run() {
                                 listener.onClickRetweet(tweet);
