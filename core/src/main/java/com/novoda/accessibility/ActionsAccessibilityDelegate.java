@@ -12,27 +12,50 @@ import static android.support.v4.view.accessibility.AccessibilityNodeInfoCompat.
 
 public class ActionsAccessibilityDelegate extends AccessibilityDelegateCompat {
 
-    private static final int NO_CUSTOM_LABEL = 0;
-
     private final Resources resources;
     private final Actions actions;
 
-    @StringRes
-    private int clickLabel = NO_CUSTOM_LABEL;
-
-    @StringRes
-    private int longClickLabel = NO_CUSTOM_LABEL;
+    private CharSequence clickLabel = null;
+    private CharSequence longClickLabel = null;
 
     public ActionsAccessibilityDelegate(Resources resources, Actions actions) {
         this.resources = resources;
         this.actions = actions;
     }
 
+    /**
+     * Label describing the action that will be performed on click
+     *
+     * @param clickLabel
+     */
     public void setClickLabel(@StringRes int clickLabel) {
+        setClickLabel(resources.getString(clickLabel));
+    }
+
+    /**
+     * Label describing the action that will be performed on click
+     *
+     * @param clickLabel
+     */
+    public void setClickLabel(CharSequence clickLabel) {
         this.clickLabel = clickLabel;
     }
 
+    /**
+     * Label describing the action that will be performed on long click
+     *
+     * @param longClickLabel
+     */
     public void setLongClickLabel(@StringRes int longClickLabel) {
+        setLongClickLabel(resources.getString(longClickLabel));
+    }
+
+    /**
+     * Label describing the action that will be performed on long click
+     *
+     * @param longClickLabel
+     */
+    public void setLongClickLabel(CharSequence longClickLabel) {
         this.longClickLabel = longClickLabel;
     }
 
@@ -49,21 +72,19 @@ public class ActionsAccessibilityDelegate extends AccessibilityDelegateCompat {
     }
 
     private void addCustomDescriptionForClickEventIfNecessary(View host, AccessibilityNodeInfoCompat info) {
-        if (!host.isClickable() || clickLabel == NO_CUSTOM_LABEL) {
+        if (!host.isClickable() || clickLabel == null) {
             return;
         }
 
-        String customClickLabelText = resources.getString(clickLabel);
-        info.addAction(new AccessibilityNodeInfoCompat.AccessibilityActionCompat(ACTION_CLICK, customClickLabelText));
+        info.addAction(new AccessibilityNodeInfoCompat.AccessibilityActionCompat(ACTION_CLICK, clickLabel));
     }
 
     private void addCustomDescriptionForLongClickEventIfNecessary(View host, AccessibilityNodeInfoCompat info) {
-        if (!host.isLongClickable() || longClickLabel == NO_CUSTOM_LABEL) {
+        if (!host.isLongClickable() || longClickLabel == null) {
             return;
         }
 
-        String customLongClickLabelText = resources.getString(longClickLabel);
-        info.addAction(new AccessibilityNodeInfoCompat.AccessibilityActionCompat(ACTION_LONG_CLICK, customLongClickLabelText));
+        info.addAction(new AccessibilityNodeInfoCompat.AccessibilityActionCompat(ACTION_LONG_CLICK, longClickLabel));
     }
 
     @Override
