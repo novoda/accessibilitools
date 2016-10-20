@@ -10,8 +10,6 @@
   <string name="tweet_action_reply">Reply</string>
   <string name="tweet_action_retweet">Retweet</string>
 
-  <!--The gesture prefix should not be necessary in description - it is a bug in the current version of TalkBack (4.1.1)-->
-  <!--TalkBack team ack this is a known issue and they will be fixing it to say "<interaction model> to <given description>"-->
-  <string name="tweet_actions_usage_hint">Double-tap for actions</string>
+  <string name="tweet_actions_usage_hint">See actions</string>
 
 </resources>
