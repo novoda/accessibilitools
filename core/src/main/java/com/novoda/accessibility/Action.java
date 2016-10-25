@@ -2,6 +2,7 @@ package com.novoda.accessibility;
 
 import android.support.annotation.IdRes;
 import android.support.annotation.StringRes;
+import android.view.View;
 
 public class Action {
 
@@ -27,6 +28,25 @@ public class Action {
     @StringRes
     public int getLabel() {
         return label;
+    }
+
+    public View.OnLongClickListener asLongClickListener() {
+        return new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                action.run();
+                return true;
+            }
+        };
+    }
+
+    public View.OnClickListener asClickListener() {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                action.run();
+            }
+        };
     }
 
     public void run() {
