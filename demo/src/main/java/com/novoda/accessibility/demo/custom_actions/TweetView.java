@@ -29,7 +29,7 @@ public class TweetView extends LinearLayout {
     public TweetView(Context context, AttributeSet attrs) {
         super(context, attrs);
         setOrientation(VERTICAL);
-        actionsAlertDialogCreator = new ActionsAlertDialogCreator(getContext(), R.string.tweet_actions_title);
+        actionsAlertDialogCreator = new ActionsAlertDialogCreator(context, R.string.tweet_actions_title);
     }
 
     @Override
