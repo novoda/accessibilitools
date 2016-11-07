@@ -41,7 +41,6 @@ public class TweetView extends LinearLayout {
         tweetTextView = (TextView) findViewById(R.id.tweet_text);
         replyButton = findViewById(R.id.tweet_button_reply);
         retweetButton = findViewById(R.id.tweet_button_retweet);
-
     }
 
     public void display(final String tweet, final Listener listener) {
