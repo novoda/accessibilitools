@@ -2,6 +2,7 @@ package com.novoda.accessibility.demo.custom_actions;
 
 import android.content.Context;
 import android.support.v4.view.ViewCompat;
+import android.support.v7.app.AlertDialog;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -18,6 +19,8 @@ import java.util.Arrays;
 
 public class TweetView extends LinearLayout {
 
+    private final ActionsAlertDialogCreator actionsAlertDialogCreator;
+
     private TextView tweetTextView;
     private View replyButton;
     private View retweetButton;
@@ -26,6 +29,7 @@ public class TweetView extends LinearLayout {
     public TweetView(Context context, AttributeSet attrs) {
         super(context, attrs);
         setOrientation(VERTICAL);
+        actionsAlertDialogCreator = new ActionsAlertDialogCreator(context, R.string.tweet_actions_title);
     }
 
     @Override
@@ -40,7 +44,7 @@ public class TweetView extends LinearLayout {
     }
 
     public void display(final String tweet, final Listener listener) {
-        final Actions actions = createActions(tweet, listener);
+        Actions actions = createActions(tweet, listener);
         ActionsAccessibilityDelegate delegate = new ActionsAccessibilityDelegate(getResources(), actions);
         delegate.setClickLabel(R.string.tweet_actions_usage_hint);
         ViewCompat.setAccessibilityDelegate(this, delegate);
@@ -131,9 +135,8 @@ public class TweetView extends LinearLayout {
     }
 
     private void showAlertDialogFor(Actions actions) {
-        new ActionsAlertDialogCreator(getContext(), R.string.tweet_actions_title, actions)
-                .create()
-                .show();
+        AlertDialog dialog = actionsAlertDialogCreator.create(actions);
+        dialog.show();
     }
 
     public interface Listener {

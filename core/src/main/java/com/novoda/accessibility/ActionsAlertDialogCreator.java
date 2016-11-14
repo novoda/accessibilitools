@@ -8,28 +8,25 @@ import android.support.v7.app.AlertDialog;
 public class ActionsAlertDialogCreator {
 
     private static final int NO_TITLE = 0;
-    
+
     private final Context context;
 
     @StringRes
     private final int title;
 
-    private final Actions actions;
-
-    public ActionsAlertDialogCreator(Context context, Actions actions) {
-        this(context, NO_TITLE, actions);
+    public ActionsAlertDialogCreator(Context context) {
+        this(context, NO_TITLE);
     }
 
-    public ActionsAlertDialogCreator(Context context, @StringRes int title, Actions actions) {
+    public ActionsAlertDialogCreator(Context context, @StringRes int title) {
         this.context = context;
         this.title = title;
-        this.actions = actions;
     }
 
-    public AlertDialog create() {
+    public AlertDialog create(final Actions actions) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setItems(
-                collateActionLabels(),
+                collateActionLabels(actions),
                 new DialogInterface.OnClickListener() {
 
                     @Override
@@ -49,7 +46,7 @@ public class ActionsAlertDialogCreator {
         return builder.create();
     }
 
-    private CharSequence[] collateActionLabels() {
+    private CharSequence[] collateActionLabels(Actions actions) {
         CharSequence[] itemLabels = new CharSequence[actions.getCount()];
         for (int i = 0; i < actions.getCount(); i++) {
             itemLabels[i] = context.getResources().getString(actions.getAction(i).getLabel());
