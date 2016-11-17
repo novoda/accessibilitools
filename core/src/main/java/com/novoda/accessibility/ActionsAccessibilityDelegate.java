@@ -7,56 +7,48 @@ import android.support.v4.view.AccessibilityDelegateCompat;
 import android.support.v4.view.accessibility.AccessibilityNodeInfoCompat;
 import android.view.View;
 
-import static android.support.v4.view.accessibility.AccessibilityNodeInfoCompat.ACTION_CLICK;
-import static android.support.v4.view.accessibility.AccessibilityNodeInfoCompat.ACTION_LONG_CLICK;
-
 public class ActionsAccessibilityDelegate extends AccessibilityDelegateCompat {
 
     private final Resources resources;
     private final Actions actions;
-
-    private CharSequence clickLabel = null;
-    private CharSequence longClickLabel = null;
+    private final UsageHintsAccessibilityDelegate usageHintsAccessibilityDelegate;
 
     public ActionsAccessibilityDelegate(Resources resources, Actions actions) {
+        this(resources, actions, new UsageHintsAccessibilityDelegate(resources));
+    }
+
+    public ActionsAccessibilityDelegate(Resources resources, Actions actions, UsageHintsAccessibilityDelegate usageHintsAccessibilityDelegate) {
         this.resources = resources;
         this.actions = actions;
+        this.usageHintsAccessibilityDelegate = usageHintsAccessibilityDelegate;
     }
 
     /**
      * Label describing the action that will be performed on click
-     *
-     * @param clickLabel
      */
     public void setClickLabel(@StringRes int clickLabel) {
-        setClickLabel(resources.getString(clickLabel));
+        usageHintsAccessibilityDelegate.setClickLabel(clickLabel);
     }
 
     /**
      * Label describing the action that will be performed on click
-     *
-     * @param clickLabel
      */
     public void setClickLabel(CharSequence clickLabel) {
-        this.clickLabel = clickLabel;
+        usageHintsAccessibilityDelegate.setClickLabel(clickLabel);
     }
 
     /**
      * Label describing the action that will be performed on long click
-     *
-     * @param longClickLabel
      */
     public void setLongClickLabel(@StringRes int longClickLabel) {
-        setLongClickLabel(resources.getString(longClickLabel));
+        usageHintsAccessibilityDelegate.setLongClickLabel(longClickLabel);
     }
 
     /**
      * Label describing the action that will be performed on long click
-     *
-     * @param longClickLabel
      */
     public void setLongClickLabel(CharSequence longClickLabel) {
-        this.longClickLabel = longClickLabel;
+        usageHintsAccessibilityDelegate.setLongClickLabel(longClickLabel);
     }
 
     @Override
@@ -67,24 +59,7 @@ public class ActionsAccessibilityDelegate extends AccessibilityDelegateCompat {
             info.addAction(new AccessibilityNodeInfoCompat.AccessibilityActionCompat(action.getId(), label));
         }
 
-        addCustomDescriptionForClickEventIfNecessary(host, info);
-        addCustomDescriptionForLongClickEventIfNecessary(host, info);
-    }
-
-    private void addCustomDescriptionForClickEventIfNecessary(View host, AccessibilityNodeInfoCompat info) {
-        if (!host.isClickable() || clickLabel == null) {
-            return;
-        }
-
-        info.addAction(new AccessibilityNodeInfoCompat.AccessibilityActionCompat(ACTION_CLICK, clickLabel));
-    }
-
-    private void addCustomDescriptionForLongClickEventIfNecessary(View host, AccessibilityNodeInfoCompat info) {
-        if (!host.isLongClickable() || longClickLabel == null) {
-            return;
-        }
-
-        info.addAction(new AccessibilityNodeInfoCompat.AccessibilityActionCompat(ACTION_LONG_CLICK, longClickLabel));
+        usageHintsAccessibilityDelegate.onInitializeAccessibilityNodeInfo(host, info);
     }
 
     @Override
