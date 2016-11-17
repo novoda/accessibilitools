@@ -21,8 +21,6 @@ public class UsageHintsAccessibilityDelegate extends AccessibilityDelegateCompat
 
     /**
      * Label describing the action that will be performed on click
-     *
-     * @param clickLabel
      */
     public void setClickLabel(@StringRes int clickLabel) {
         setClickLabel(resources.getString(clickLabel));
@@ -30,8 +28,6 @@ public class UsageHintsAccessibilityDelegate extends AccessibilityDelegateCompat
 
     /**
      * Label describing the action that will be performed on click
-     *
-     * @param clickLabel
      */
     public void setClickLabel(CharSequence clickLabel) {
         this.clickLabel = clickLabel;
@@ -39,8 +35,6 @@ public class UsageHintsAccessibilityDelegate extends AccessibilityDelegateCompat
 
     /**
      * Label describing the action that will be performed on long click
-     *
-     * @param longClickLabel
      */
     public void setLongClickLabel(@StringRes int longClickLabel) {
         setLongClickLabel(resources.getString(longClickLabel));
@@ -48,8 +42,6 @@ public class UsageHintsAccessibilityDelegate extends AccessibilityDelegateCompat
 
     /**
      * Label describing the action that will be performed on long click
-     *
-     * @param longClickLabel
      */
     public void setLongClickLabel(CharSequence longClickLabel) {
         this.longClickLabel = longClickLabel;
