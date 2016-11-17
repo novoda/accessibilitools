@@ -9,7 +9,7 @@ import android.view.View;
 import static android.support.v4.view.accessibility.AccessibilityNodeInfoCompat.ACTION_CLICK;
 import static android.support.v4.view.accessibility.AccessibilityNodeInfoCompat.ACTION_LONG_CLICK;
 
-class UsageHintsAccessibilityDelegate extends AccessibilityDelegateCompat {
+public class UsageHintsAccessibilityDelegate extends AccessibilityDelegateCompat {
 
     private final Resources resources;
     private CharSequence clickLabel = null;
