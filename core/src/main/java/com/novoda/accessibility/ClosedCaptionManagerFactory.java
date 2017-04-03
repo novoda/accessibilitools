@@ -16,8 +16,8 @@ class ClosedCaptionManagerFactory {
     }
 
     public CaptionManager createCaptionManager(Context context) {
-        if (androidVersion.isKitKatOrHigher()) {
-            return ClosedCaptionManager.newInstance(context);
+        if (androidVersion.isMarshmallowHigher()) {
+            return ClosedCaptionManagerMarshmallow.newInstance(context);
         } else {
             return new DummyClosedCaptionManager();
         }
