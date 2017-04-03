@@ -13,18 +13,18 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 
-@TargetApi(Build.VERSION_CODES.KITKAT)
-public class ClosedCaptionManagerTest {
+@TargetApi(Build.VERSION_CODES.M)
+public class ClosedCaptionManagerMarshmallowTest {
 
     @Mock
     CaptioningManager mockCaptioningManager;
 
-    private ClosedCaptionManager closedCaptionManager;
+    private ClosedCaptionManagerMarshmallow closedCaptionManager;
 
     @Before
     public void setUp() {
         initMocks(this);
-        closedCaptionManager = new ClosedCaptionManager(mockCaptioningManager);
+        closedCaptionManager = new ClosedCaptionManagerMarshmallow(mockCaptioningManager);
     }
 
     @Test
