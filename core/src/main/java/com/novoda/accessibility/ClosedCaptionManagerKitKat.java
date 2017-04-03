@@ -30,14 +30,11 @@ public class ClosedCaptionManagerKitKat implements CaptionManager {
     }
 
     /**
-     * <p>This method implementation was copy/pasted <a href="http://bit.ly/1TILAzT">from the AOSP.</a></p>
-     * <b>Why?</b>
-     * <p>In KitKat devices, when getting the CaptioningManager it creates a Handler without specifying
-     * the Looper. So if you run the getSystemService(CAPTIONING) in a worker thread wich it does not
-     * have any Looper attached it will crash. Since we are only using this to get the status of the
-     * captions in accessibility we opted for copy this code instead of getting the system service and
-     * leave the thread/looper as it is. This was introduced because we needed to run that in a job
-     * scheduler library.</p>
+     * <p>Copied from AOSP implementation of CaptioningManager</p>
+     * <p>Pre-Marshmallow, querying for CaptioningManager creates a Handler without specifying the Looper.
+     * On worker threads, this causes an exception since it can only be used on the main thread.</p>
+     *
+     * @see <a href="http://bit.ly/1TILAzT">CaptioningManager</a>
      */
     private int getCaptionSettingAvailability() {
         return Settings.Secure.getInt(contentResolver, ACCESSIBILITY_CAPTIONING, DISABLED);
