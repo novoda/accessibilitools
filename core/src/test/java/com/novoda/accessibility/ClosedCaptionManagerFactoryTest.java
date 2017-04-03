@@ -27,12 +27,21 @@ public class ClosedCaptionManagerFactoryTest {
     }
 
     @Test
-    public void givenAndroidVersionMarshmallowOrHigher_whenCreatingANewCaptionManager_thenClosedCaptionManagerReturned() {
+    public void givenAndroidVersionMarshmallowOrHigher_whenCreatingANewCaptionManager_thenMarshmallowClosedCaptionManagerReturned() {
         when(mockAndroidVersion.isMarshmallowHigher()).thenReturn(true);
 
         CaptionManager captionManager = closedCaptionManagerFactory.createCaptionManager(mockContext);
 
         assertThat(captionManager).isInstanceOf(ClosedCaptionManagerMarshmallow.class);
+    }
+
+    @Test
+    public void givenAndroidVersionKitKatOrHigher_whenCreatingANewCaptionManager_thenKitKatClosedCaptionManagerReturned() {
+        when(mockAndroidVersion.isKitKatOrHigher()).thenReturn(true);
+
+        CaptionManager captionManager = closedCaptionManagerFactory.createCaptionManager(mockContext);
+
+        assertThat(captionManager).isInstanceOf(ClosedCaptionManagerKitKat.class);
     }
 
     @Test
