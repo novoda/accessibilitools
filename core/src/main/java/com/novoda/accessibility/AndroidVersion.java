@@ -18,7 +18,7 @@ class AndroidVersion {
         return deviceVersion >= Build.VERSION_CODES.KITKAT;
     }
 
-    public boolean isMarshmallowHigher() {
+    public boolean isMarshmallowOrHigher() {
         return deviceVersion >= Build.VERSION_CODES.M;
     }
 

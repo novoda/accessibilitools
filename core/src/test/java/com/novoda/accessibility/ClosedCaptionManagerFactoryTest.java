@@ -28,7 +28,7 @@ public class ClosedCaptionManagerFactoryTest {
 
     @Test
     public void givenAndroidVersionMarshmallowOrHigher_whenCreatingANewCaptionManager_thenMarshmallowClosedCaptionManagerReturned() {
-        when(mockAndroidVersion.isMarshmallowHigher()).thenReturn(true);
+        when(mockAndroidVersion.isMarshmallowOrHigher()).thenReturn(true);
 
         CaptionManager captionManager = closedCaptionManagerFactory.createCaptionManager(mockContext);
 
