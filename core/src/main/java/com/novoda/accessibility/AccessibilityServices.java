@@ -45,4 +45,39 @@ public class AccessibilityServices {
     public boolean isClosedCaptioningEnabled() {
         return captionManager.isClosedCaptioningEnabled();
     }
+
+    public boolean isTalkBackEnabled() {
+        return isKnownServiceEnabled(KnownService.TALKBACK);
+    }
+
+    public boolean isSwitchAccessEnabled() {
+        return isKnownServiceEnabled(KnownService.SWITCH_ACCESS);
+    }
+
+    public boolean isSelectToSpeakEnabled() {
+        return isKnownServiceEnabled(KnownService.SELECT_TO_SPEAK);
+    }
+
+    private boolean isKnownServiceEnabled(KnownService service) {
+        List<AccessibilityServiceInfo> enabledServices = getEnabledServicesFor(AccessibilityServiceInfo.FEEDBACK_ALL_MASK);
+        for (AccessibilityServiceInfo enabledService : enabledServices) {
+            if (service.qualifiedName.equals(enabledService.getId())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private enum KnownService {
+
+        TALKBACK("com.google.android.marvin.talkback/.TalkBackService"),
+        SWITCH_ACCESS("com.google.android.marvin.talkback/com.android.switchaccess.SwitchAccessService"),
+        SELECT_TO_SPEAK("com.google.android.marvin.talkback/com.google.android.accessibility.selecttospeak.SelectToSpeakService");
+
+        private final String qualifiedName;
+
+        KnownService(String qualifiedName) {
+            this.qualifiedName = qualifiedName;
+        }
+    }
 }

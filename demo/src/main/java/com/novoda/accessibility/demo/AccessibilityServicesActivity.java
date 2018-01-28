@@ -9,7 +9,10 @@ import com.novoda.accessibility.AccessibilityServices;
 public class AccessibilityServicesActivity extends AppCompatActivity {
 
     private AccessibilityServices accessibilityServices;
-    private TextView talkbackStatus;
+    private TextView spokenFeedback;
+    private TextView talkbackFeedback;
+    private TextView switchAccessFeedback;
+    private TextView selectToSpeakFeedback;
     private TextView closedCaptioningStatus;
 
     @Override
@@ -18,7 +21,10 @@ public class AccessibilityServicesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_accessibility_checker);
 
         accessibilityServices = AccessibilityServices.newInstance(this);
-        talkbackStatus = findViewById(R.id.talkback_status);
+        spokenFeedback = findViewById(R.id.spoken_feedback_service_status);
+        talkbackFeedback = findViewById(R.id.talkback_status);
+        switchAccessFeedback = findViewById(R.id.switch_access_status);
+        selectToSpeakFeedback = findViewById(R.id.select_to_speak_status);
         closedCaptioningStatus = findViewById(R.id.closedcaptioning_status);
     }
 
@@ -27,9 +33,27 @@ public class AccessibilityServicesActivity extends AppCompatActivity {
         super.onResume();
 
         if (accessibilityServices.isSpokenFeedbackEnabled()) {
-            talkbackStatus.setText("Spoken feedback is enabled");
+            spokenFeedback.setText("Spoken feedback is enabled");
         } else {
-            talkbackStatus.setText("Spoken feedback is not enabled");
+            spokenFeedback.setText("Spoken feedback is not enabled");
+        }
+
+        if (accessibilityServices.isTalkBackEnabled()) {
+            talkbackFeedback.setText("TalkBack is enabled");
+        } else {
+            talkbackFeedback.setText("TalkBack is not enabled");
+        }
+
+        if (accessibilityServices.isSwitchAccessEnabled()) {
+            switchAccessFeedback.setText("Switch Access is enabled");
+        } else {
+            switchAccessFeedback.setText("Switch Access is not enabled");
+        }
+
+        if (accessibilityServices.isSelectToSpeakEnabled()) {
+            selectToSpeakFeedback.setText("Select To Speak is enabled");
+        } else {
+            selectToSpeakFeedback.setText("Select To Speak is not enabled");
         }
 
         if (accessibilityServices.isClosedCaptioningEnabled()) {
