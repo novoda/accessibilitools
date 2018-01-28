@@ -47,5 +47,4 @@ public class ClosedCaptionManagerMarshmallowTest {
 
         assertThat(closedCaptionManager.isClosedCaptioningEnabled()).isFalse();
     }
-
 }

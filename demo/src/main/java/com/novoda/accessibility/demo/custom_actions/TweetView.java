@@ -38,12 +38,12 @@ public class TweetView extends LinearLayout {
         services = AccessibilityServices.newInstance(getContext());
 
         View.inflate(getContext(), R.layout.merge_tweet, this);
-        tweetTextView = (TextView) findViewById(R.id.tweet_text);
+        tweetTextView = findViewById(R.id.tweet_text);
         replyButton = findViewById(R.id.tweet_button_reply);
         retweetButton = findViewById(R.id.tweet_button_retweet);
     }
 
-    public void display(final String tweet, final Listener listener) {
+    public void display(String tweet, final Listener listener) {
         Actions actions = createActions(tweet, listener);
         ActionsAccessibilityDelegate delegate = new ActionsAccessibilityDelegate(getResources(), actions);
         delegate.setClickLabel(R.string.tweet_actions_usage_hint);
@@ -146,7 +146,5 @@ public class TweetView extends LinearLayout {
         void onClickReply(String tweet);
 
         void onClickRetweet(String tweet);
-
     }
-
 }

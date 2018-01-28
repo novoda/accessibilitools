@@ -21,5 +21,4 @@ class AndroidVersion {
     public boolean isMarshmallowOrHigher() {
         return deviceVersion >= Build.VERSION_CODES.M;
     }
-
 }

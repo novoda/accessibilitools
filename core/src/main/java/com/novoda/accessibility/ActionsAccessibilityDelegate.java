@@ -72,5 +72,4 @@ public class ActionsAccessibilityDelegate extends AccessibilityDelegateCompat {
             return true;
         }
     }
-
 }

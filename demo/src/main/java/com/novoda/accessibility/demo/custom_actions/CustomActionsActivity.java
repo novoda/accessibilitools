@@ -15,7 +15,7 @@ public class CustomActionsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_custom_actions);
 
-        TweetView tweetView = (TweetView) findViewById(R.id.tweet);
+        TweetView tweetView = findViewById(R.id.tweet);
         tweetView.display(
                 "This is a tweet lol",
                 new TweetView.Listener() {
@@ -46,5 +46,4 @@ public class CustomActionsActivity extends AppCompatActivity {
         toast = Toast.makeText(this, message, Toast.LENGTH_SHORT);
         toast.show();
     }
-
 }

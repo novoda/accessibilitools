@@ -2,34 +2,27 @@ apply plugin: 'com.android.library'
 apply plugin: 'bintray-release'
 
 android {
+    compileSdkVersion versions.androidSdk.compile
+    buildToolsVersion versions.androidSdk.buildTools
+
     defaultConfig {
-        minSdkVersion 16
-        targetSdkVersion 25
+        minSdkVersion versions.androidSdk.min
     }
-
-    repositories {
-        jcenter()
-    }
-
-    compileSdkVersion 25
-    buildToolsVersion "25.0.0"
-}
-
-publish {
-    userOrg = 'novoda'
-    repoName = 'maven'
-    groupId = 'com.novoda'
-    artifactId = 'accessibilitools'
-    version = project.version
-
-    uploadName = 'accessibilitools'
-    description = 'Tools to help implement accessibility features on Android'
-    website = 'https://github.com/novoda/spikes/tree/master/accessibilitools'
 }
 
 dependencies {
-    compile 'com.android.support:appcompat-v7:25.0.0'
-    testCompile 'junit:junit:4.12'
-    testCompile 'org.mockito:mockito-core:1.10.19'
-    testCompile 'com.squareup.assertj:assertj-android:1.1.0'
+    implementation libraries.supportAppCompatV7
+
+    testImplementation libraries.jUnit
+    testImplementation libraries.mockitoCore
+    testImplementation libraries.assertJAndroid
+}
+
+publish {
+    userOrg = artifactsPublish.userOrg
+    groupId = artifactsPublish.groupId
+    artifactId = 'accessibilitools'
+    publishVersion = artifactsPublish.version
+    desc = 'Tools to help implement accessibility features on Android'
+    website = artifactsPublish.website
 }

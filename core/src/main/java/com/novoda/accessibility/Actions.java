@@ -54,5 +54,4 @@ public class Actions implements Iterable<Action> {
     public Iterator<Action> iterator() {
         return actions.iterator();
     }
-
 }

@@ -53,5 +53,4 @@ public class ActionsAlertDialogCreator {
         }
         return itemLabels;
     }
-
 }
