@@ -81,5 +81,4 @@ public class Action {
         result = 31 * result + action.hashCode();
         return result;
     }
-
 }

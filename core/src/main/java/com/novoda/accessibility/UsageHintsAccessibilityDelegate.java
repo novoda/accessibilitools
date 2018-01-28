@@ -70,5 +70,4 @@ public class UsageHintsAccessibilityDelegate extends AccessibilityDelegateCompat
 
         info.addAction(new AccessibilityNodeInfoCompat.AccessibilityActionCompat(ACTION_LONG_CLICK, longClickLabel));
     }
-
 }

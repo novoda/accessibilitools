@@ -1,18 +1,19 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.0"
+    compileSdkVersion versions.androidSdk.compile
+    buildToolsVersion versions.androidSdk.buildTools
 
     defaultConfig {
-        applicationId "com.novoda.accessibility.demo"
-        minSdkVersion 16
-        targetSdkVersion 25
+        applicationId 'com.novoda.accessibility.demo'
+        minSdkVersion versions.androidSdk.min
+        targetSdkVersion versions.androidSdk.target
         versionCode 1
-        versionName "1.0"
+        versionName '1.0'
     }
 }
 
 dependencies {
-    compile project(":core")
+    implementation project(':core')
+    implementation libraries.supportAppCompatV7
 }

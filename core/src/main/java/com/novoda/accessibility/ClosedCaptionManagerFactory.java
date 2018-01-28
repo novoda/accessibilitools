@@ -24,5 +24,4 @@ class ClosedCaptionManagerFactory {
             return new DummyClosedCaptionManager();
         }
     }
-
 }

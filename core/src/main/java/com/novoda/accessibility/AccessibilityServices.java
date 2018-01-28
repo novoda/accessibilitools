@@ -45,5 +45,4 @@ public class AccessibilityServices {
     public boolean isClosedCaptioningEnabled() {
         return captionManager.isClosedCaptioningEnabled();
     }
-
 }

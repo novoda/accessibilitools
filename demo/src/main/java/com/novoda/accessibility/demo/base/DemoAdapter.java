@@ -70,5 +70,4 @@ public class DemoAdapter extends BaseAdapter {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         return layoutInflater.inflate(R.layout.view_demos_item, parent, false);
     }
-
 }

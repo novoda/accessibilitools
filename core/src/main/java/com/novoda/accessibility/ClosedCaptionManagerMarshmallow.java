@@ -24,5 +24,4 @@ class ClosedCaptionManagerMarshmallow implements CaptionManager {
     public boolean isClosedCaptioningEnabled() {
         return captioningManager.isEnabled();
     }
-
 }

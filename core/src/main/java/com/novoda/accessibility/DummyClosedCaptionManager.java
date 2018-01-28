@@ -10,5 +10,4 @@ class DummyClosedCaptionManager implements CaptionManager {
     public boolean isClosedCaptioningEnabled() {
         return false;
     }
-
 }

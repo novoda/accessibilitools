@@ -18,8 +18,8 @@ public class AccessibilityServicesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_accessibility_checker);
 
         accessibilityServices = AccessibilityServices.newInstance(this);
-        talkbackStatus = ((TextView) findViewById(R.id.talkback_status));
-        closedCaptioningStatus = ((TextView) findViewById(R.id.closedcaptioning_status));
+        talkbackStatus = findViewById(R.id.talkback_status);
+        closedCaptioningStatus = findViewById(R.id.closedcaptioning_status);
     }
 
     @Override
@@ -38,5 +38,4 @@ public class AccessibilityServicesActivity extends AppCompatActivity {
             closedCaptioningStatus.setText("Closed captioning is not enabled");
         }
     }
-
 }

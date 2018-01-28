@@ -39,5 +39,4 @@ public class ClosedCaptionManagerKitKat implements CaptionManager {
     private int getCaptionSettingAvailability() {
         return Settings.Secure.getInt(contentResolver, ACCESSIBILITY_CAPTIONING, DISABLED);
     }
-
 }

@@ -23,8 +23,7 @@ public class DemosActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_demos);
 
-        ListView listView = ((ListView) findViewById(R.id.list));
+        ListView listView = findViewById(R.id.list);
         listView.setAdapter(new DemoAdapter(demos));
     }
-
 }
