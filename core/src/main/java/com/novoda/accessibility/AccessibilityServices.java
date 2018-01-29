@@ -28,7 +28,7 @@ public class AccessibilityServices {
     /**
      * Returns true if any accessibility service offering spoken feedback are enabled.
      * <p/>
-     * Be aware this will return true if even TalkBack is suspended, since it's still enabled.
+     * Be aware this will return true even if TalkBack is suspended, since it's still enabled.
      */
     public boolean isSpokenFeedbackEnabled() {
         List<AccessibilityServiceInfo> enabledServices = getEnabledServicesFor(AccessibilityServiceInfo.FEEDBACK_SPOKEN);
