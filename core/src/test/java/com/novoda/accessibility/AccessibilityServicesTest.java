@@ -3,41 +3,27 @@ package com.novoda.accessibility;
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.view.accessibility.AccessibilityManager;
 
-import java.util.Collections;
-import java.util.List;
-
-import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mock;
 
+import java.util.Collections;
+
+import static android.accessibilityservice.AccessibilityServiceInfo.FEEDBACK_ALL_MASK;
+import static android.accessibilityservice.AccessibilityServiceInfo.FEEDBACK_SPOKEN;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.when;
-import static org.mockito.MockitoAnnotations.initMocks;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.mock;
 
 public class AccessibilityServicesTest {
 
-    @Mock
-    AccessibilityManager mockAccessibilityManager;
-
-    @Mock
-    AccessibilityServiceInfo mockAccessibilityServiceInfo;
-
-    @Mock
-    CaptionManager mockCaptionManager;
-
-    private AccessibilityServices accessibilityServices;
-
-    @Before
-    public void setUp() {
-        initMocks(this);
-        accessibilityServices = new AccessibilityServices(mockAccessibilityManager, mockCaptionManager);
-    }
+    private final AccessibilityManager accessibilityManager = mock(AccessibilityManager.class);
+    private final CaptionManager captionManager = mock(CaptionManager.class);
+    private final AccessibilityServices accessibilityServices = new AccessibilityServices(accessibilityManager, captionManager);
 
     @Test
-    public void whenAccessibilityServiceInfoListIsNotEmpty_thenSpokenFeedbackIsEnabled() {
-        List<AccessibilityServiceInfo> serviceInfoList = Collections.singletonList(mockAccessibilityServiceInfo);
-        when(mockAccessibilityManager.getEnabledAccessibilityServiceList(AccessibilityServiceInfo.FEEDBACK_SPOKEN))
-                .thenReturn(serviceInfoList);
+    public void givenEnabledServicesListForSpokenFeedbackIsNotEmpty_thenReportsSpokenFeedbackIsEnabled() {
+        AccessibilityServiceInfo anyServiceInfo = accessibilityServiceInfoWithId("any");
+        given(accessibilityManager.getEnabledAccessibilityServiceList(FEEDBACK_SPOKEN))
+                .willReturn(Collections.singletonList(anyServiceInfo));
 
         boolean spokenFeedbackEnabled = accessibilityServices.isSpokenFeedbackEnabled();
 
@@ -45,12 +31,29 @@ public class AccessibilityServicesTest {
     }
 
     @Test
-    public void whenAccessibilityServiceInfoListIsEmpty_thenSpokenFeedbackIsDisabled() {
-        when(mockAccessibilityManager.getEnabledAccessibilityServiceList(AccessibilityServiceInfo.FEEDBACK_SPOKEN))
-                .thenReturn(Collections.<AccessibilityServiceInfo>emptyList());
+    public void givenEnabledServicesListForSpokenFeedbackIsEmpty_thenReportsSpokenFeedbackIsDisabled() {
+        given(accessibilityManager.getEnabledAccessibilityServiceList(FEEDBACK_SPOKEN))
+                .willReturn(Collections.<AccessibilityServiceInfo>emptyList());
 
         boolean spokenFeedbackEnabled = accessibilityServices.isSpokenFeedbackEnabled();
 
         assertThat(spokenFeedbackEnabled).isFalse();
+    }
+
+    @Test
+    public void givenEnabledServicesListIncludesSwitchAccess_thenReportsSwitchAccessIsEnabled() {
+        AccessibilityServiceInfo switchAccessServiceInfo = accessibilityServiceInfoWithId(Service.SWITCH_ACCESS.qualifiedName());
+        given(accessibilityManager.getEnabledAccessibilityServiceList(FEEDBACK_ALL_MASK))
+                .willReturn(Collections.singletonList(switchAccessServiceInfo));
+
+        boolean switchAccessEnabled = accessibilityServices.isSwitchAccessEnabled();
+
+        assertThat(switchAccessEnabled).isTrue();
+    }
+
+    private AccessibilityServiceInfo accessibilityServiceInfoWithId(String id) {
+        AccessibilityServiceInfo serviceInfo = mock(AccessibilityServiceInfo.class);
+        given(serviceInfo.getId()).willReturn(id);
+        return serviceInfo;
     }
 }

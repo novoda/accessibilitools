@@ -2,10 +2,11 @@ package com.novoda.accessibility;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.content.Context;
-import android.support.annotation.VisibleForTesting;
 import android.view.accessibility.AccessibilityManager;
 
 import java.util.List;
+
+import static com.novoda.accessibility.Service.SWITCH_ACCESS;
 
 public class AccessibilityServices {
 
@@ -19,16 +20,15 @@ public class AccessibilityServices {
         return new AccessibilityServices(accessibilityManager, captionManager);
     }
 
-    @VisibleForTesting
     AccessibilityServices(AccessibilityManager accessibilityManager, CaptionManager captionManager) {
         this.accessibilityManager = accessibilityManager;
         this.captionManager = captionManager;
     }
 
     /**
-     * Reports if any services offering spoken feedback are enabled.
+     * Returns true if any accessibility service offering spoken feedback are enabled.
      * <p/>
-     * Be aware it will return true when TalkBack is enabled, even if it's suspended.
+     * Be aware this will return true if even TalkBack is suspended, since it's still enabled.
      */
     public boolean isSpokenFeedbackEnabled() {
         List<AccessibilityServiceInfo> enabledServices = getEnabledServicesFor(AccessibilityServiceInfo.FEEDBACK_SPOKEN);
@@ -40,44 +40,26 @@ public class AccessibilityServices {
     }
 
     /**
-     * Reports if video captioning is enabled on the device.
+     * Returns true if video captioning is enabled on the device.
      */
     public boolean isClosedCaptioningEnabled() {
         return captionManager.isClosedCaptioningEnabled();
     }
 
-    public boolean isTalkBackEnabled() {
-        return isKnownServiceEnabled(KnownService.TALKBACK);
-    }
-
+    /**
+     * Returns true if the Switch Access accessibility service is enabled.
+     */
     public boolean isSwitchAccessEnabled() {
-        return isKnownServiceEnabled(KnownService.SWITCH_ACCESS);
+        return isAccessibilityServiceEnabled(SWITCH_ACCESS.qualifiedName());
     }
 
-    public boolean isSelectToSpeakEnabled() {
-        return isKnownServiceEnabled(KnownService.SELECT_TO_SPEAK);
-    }
-
-    private boolean isKnownServiceEnabled(KnownService service) {
+    private boolean isAccessibilityServiceEnabled(String serviceName) {
         List<AccessibilityServiceInfo> enabledServices = getEnabledServicesFor(AccessibilityServiceInfo.FEEDBACK_ALL_MASK);
         for (AccessibilityServiceInfo enabledService : enabledServices) {
-            if (service.qualifiedName.equals(enabledService.getId())) {
+            if (serviceName.equals(enabledService.getId())) {
                 return true;
             }
         }
         return false;
-    }
-
-    private enum KnownService {
-
-        TALKBACK("com.google.android.marvin.talkback/.TalkBackService"),
-        SWITCH_ACCESS("com.google.android.marvin.talkback/com.android.switchaccess.SwitchAccessService"),
-        SELECT_TO_SPEAK("com.google.android.marvin.talkback/com.google.android.accessibility.selecttospeak.SelectToSpeakService");
-
-        private final String qualifiedName;
-
-        KnownService(String qualifiedName) {
-            this.qualifiedName = qualifiedName;
-        }
     }
 }
