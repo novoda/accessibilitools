@@ -51,6 +51,17 @@ public class AccessibilityServicesTest {
         assertThat(switchAccessEnabled).isTrue();
     }
 
+    @Test
+    public void givenEnabledServicesListDoesNotIncludeSwitchAccess_thenReportsSwitchAccessIsDisabled() {
+        AccessibilityServiceInfo anyOtherServiceInfo = accessibilityServiceInfoWithId("not switch access");
+        given(accessibilityManager.getEnabledAccessibilityServiceList(FEEDBACK_ALL_MASK))
+                .willReturn(Collections.singletonList(anyOtherServiceInfo));
+
+        boolean switchAccessEnabled = accessibilityServices.isSwitchAccessEnabled();
+
+        assertThat(switchAccessEnabled).isFalse();
+    }
+
     private AccessibilityServiceInfo accessibilityServiceInfoWithId(String id) {
         AccessibilityServiceInfo serviceInfo = mock(AccessibilityServiceInfo.class);
         given(serviceInfo.getId()).willReturn(id);
