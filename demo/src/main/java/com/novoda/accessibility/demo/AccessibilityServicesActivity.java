@@ -10,9 +10,7 @@ public class AccessibilityServicesActivity extends AppCompatActivity {
 
     private AccessibilityServices accessibilityServices;
     private TextView spokenFeedback;
-    private TextView talkbackFeedback;
     private TextView switchAccessFeedback;
-    private TextView selectToSpeakFeedback;
     private TextView closedCaptioningStatus;
 
     @Override
@@ -22,9 +20,7 @@ public class AccessibilityServicesActivity extends AppCompatActivity {
 
         accessibilityServices = AccessibilityServices.newInstance(this);
         spokenFeedback = findViewById(R.id.spoken_feedback_service_status);
-        talkbackFeedback = findViewById(R.id.talkback_status);
         switchAccessFeedback = findViewById(R.id.switch_access_status);
-        selectToSpeakFeedback = findViewById(R.id.select_to_speak_status);
         closedCaptioningStatus = findViewById(R.id.closedcaptioning_status);
     }
 
@@ -38,22 +34,10 @@ public class AccessibilityServicesActivity extends AppCompatActivity {
             spokenFeedback.setText("Spoken feedback is not enabled");
         }
 
-        if (accessibilityServices.isTalkBackEnabled()) {
-            talkbackFeedback.setText("TalkBack is enabled");
-        } else {
-            talkbackFeedback.setText("TalkBack is not enabled");
-        }
-
         if (accessibilityServices.isSwitchAccessEnabled()) {
             switchAccessFeedback.setText("Switch Access is enabled");
         } else {
             switchAccessFeedback.setText("Switch Access is not enabled");
-        }
-
-        if (accessibilityServices.isSelectToSpeakEnabled()) {
-            selectToSpeakFeedback.setText("Select To Speak is enabled");
-        } else {
-            selectToSpeakFeedback.setText("Select To Speak is not enabled");
         }
 
         if (accessibilityServices.isClosedCaptioningEnabled()) {
