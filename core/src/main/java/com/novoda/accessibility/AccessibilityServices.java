@@ -2,10 +2,11 @@ package com.novoda.accessibility;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.content.Context;
-import android.support.annotation.VisibleForTesting;
 import android.view.accessibility.AccessibilityManager;
 
 import java.util.List;
+
+import static com.novoda.accessibility.Service.SWITCH_ACCESS;
 
 public class AccessibilityServices {
 
@@ -19,16 +20,15 @@ public class AccessibilityServices {
         return new AccessibilityServices(accessibilityManager, captionManager);
     }
 
-    @VisibleForTesting
     AccessibilityServices(AccessibilityManager accessibilityManager, CaptionManager captionManager) {
         this.accessibilityManager = accessibilityManager;
         this.captionManager = captionManager;
     }
 
     /**
-     * Reports if any services offering spoken feedback are enabled.
+     * Returns true if any accessibility service offering spoken feedback are enabled.
      * <p/>
-     * Be aware it will return true when TalkBack is enabled, even if it's suspended.
+     * Be aware this will return true even if TalkBack is suspended, since it's still enabled.
      */
     public boolean isSpokenFeedbackEnabled() {
         List<AccessibilityServiceInfo> enabledServices = getEnabledServicesFor(AccessibilityServiceInfo.FEEDBACK_SPOKEN);
@@ -40,9 +40,26 @@ public class AccessibilityServices {
     }
 
     /**
-     * Reports if video captioning is enabled on the device.
+     * Returns true if video captioning is enabled on the device.
      */
     public boolean isClosedCaptioningEnabled() {
         return captionManager.isClosedCaptioningEnabled();
+    }
+
+    /**
+     * Returns true if the Switch Access accessibility service is enabled.
+     */
+    public boolean isSwitchAccessEnabled() {
+        return isAccessibilityServiceEnabled(SWITCH_ACCESS.flattenedComponentName());
+    }
+
+    private boolean isAccessibilityServiceEnabled(String serviceName) {
+        List<AccessibilityServiceInfo> enabledServices = getEnabledServicesFor(AccessibilityServiceInfo.FEEDBACK_ALL_MASK);
+        for (AccessibilityServiceInfo enabledService : enabledServices) {
+            if (serviceName.equals(enabledService.getId())) {
+                return true;
+            }
+        }
+        return false;
     }
 }
