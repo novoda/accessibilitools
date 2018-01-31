@@ -42,7 +42,7 @@ public class AccessibilityServicesTest {
 
     @Test
     public void givenEnabledServicesListIncludesSwitchAccess_thenReportsSwitchAccessIsEnabled() {
-        AccessibilityServiceInfo switchAccessServiceInfo = accessibilityServiceInfoWithId(Service.SWITCH_ACCESS.qualifiedName());
+        AccessibilityServiceInfo switchAccessServiceInfo = accessibilityServiceInfoWithId(Service.SWITCH_ACCESS.flattenedComponentName());
         given(accessibilityManager.getEnabledAccessibilityServiceList(FEEDBACK_ALL_MASK))
                 .willReturn(Collections.singletonList(switchAccessServiceInfo));
 

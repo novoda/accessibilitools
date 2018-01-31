@@ -11,13 +11,13 @@ public enum Service {
     SWITCH_ACCESS("com.google.android.marvin.talkback/com.android.switchaccess.SwitchAccessService"),
     SELECT_TO_SPEAK("com.google.android.marvin.talkback/com.google.android.accessibility.selecttospeak.SelectToSpeakService");
 
-    private final String qualifiedName;
+    private final String flattenedComponentName;
 
-    Service(String qualifiedName) {
-        this.qualifiedName = qualifiedName;
+    Service(String flattenedComponentName) {
+        this.flattenedComponentName = flattenedComponentName;
     }
 
-    public String qualifiedName() {
-        return qualifiedName;
+    public String flattenedComponentName() {
+        return flattenedComponentName;
     }
 }

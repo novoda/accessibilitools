@@ -50,7 +50,7 @@ public class AccessibilityServices {
      * Returns true if the Switch Access accessibility service is enabled.
      */
     public boolean isSwitchAccessEnabled() {
-        return isAccessibilityServiceEnabled(SWITCH_ACCESS.qualifiedName());
+        return isAccessibilityServiceEnabled(SWITCH_ACCESS.flattenedComponentName());
     }
 
     private boolean isAccessibilityServiceEnabled(String serviceName) {
