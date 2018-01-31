@@ -51,17 +51,12 @@ public class DemoAdapter extends BaseAdapter {
         return view;
     }
 
-    private void bindView(TextView view, final Demo demo, final Context context) {
+    private void bindView(TextView view, Demo demo, Context context) {
         view.setText(demo.label);
         view.setOnClickListener(
-                new View.OnClickListener() {
-
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(context, demo.activityClass);
-                        context.startActivity(intent);
-                    }
-
+                v -> {
+                    Intent intent = new Intent(context, demo.activityClass);
+                    context.startActivity(intent);
                 }
         );
     }

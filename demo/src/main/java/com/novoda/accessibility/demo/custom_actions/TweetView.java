@@ -43,7 +43,7 @@ public class TweetView extends LinearLayout {
         retweetButton = findViewById(R.id.tweet_button_retweet);
     }
 
-    public void display(String tweet, final Listener listener) {
+    public void display(String tweet, Listener listener) {
         Actions actions = createActions(tweet, listener);
         ActionsAccessibilityDelegate delegate = new ActionsAccessibilityDelegate(getResources(), actions);
         delegate.setClickLabel(R.string.tweet_actions_usage_hint);
@@ -58,17 +58,9 @@ public class TweetView extends LinearLayout {
         }
     }
 
-    private void setClickListenerToShowDialogFor(final Actions actions) {
+    private void setClickListenerToShowDialogFor(Actions actions) {
         setButtonsAsClickableFalseToFixBehaviorChangeOnLollipopPlus();
-
-        setOnClickListener(
-                new OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        showAlertDialogFor(actions);
-                    }
-                }
-        );
+        setOnClickListener(v -> showAlertDialogFor(actions));
     }
 
     private void setButtonsAsClickableFalseToFixBehaviorChangeOnLollipopPlus() {
@@ -77,59 +69,18 @@ public class TweetView extends LinearLayout {
         retweetButton.setClickable(false);
     }
 
-    private void setIndividualClickListeners(final String tweet, final Listener listener) {
-        setOnClickListener(
-                new OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        listener.onClick(tweet);
-                    }
-                }
-        );
-
-        replyButton.setOnClickListener(
-                new OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        listener.onClickReply(tweet);
-                    }
-                }
-        );
-
-        retweetButton.setOnClickListener(
-                new OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        listener.onClickRetweet(tweet);
-                    }
-                }
-        );
+    private void setIndividualClickListeners(String tweet, Listener listener) {
+        setOnClickListener(v -> listener.onClick(tweet));
+        replyButton.setOnClickListener(v -> listener.onClickReply(tweet));
+        retweetButton.setOnClickListener(v -> listener.onClickRetweet(tweet));
     }
 
-    private Actions createActions(final String tweet, final Listener listener) {
+    private Actions createActions(String tweet, Listener listener) {
         return new Actions(
                 Arrays.asList(
-                        new Action(
-                                R.id.tweet_action_open, R.string.tweet_action_open, new Runnable() {
-                            @Override
-                            public void run() {
-                                listener.onClick(tweet);
-                            }
-                        }),
-                        new Action(
-                                R.id.tweet_action_reply, R.string.tweet_action_reply, new Runnable() {
-                            @Override
-                            public void run() {
-                                listener.onClickReply(tweet);
-                            }
-                        }),
-                        new Action(
-                                R.id.tweet_action_retweet, R.string.tweet_action_retweet, new Runnable() {
-                            @Override
-                            public void run() {
-                                listener.onClickRetweet(tweet);
-                            }
-                        })
+                        new Action(R.id.tweet_action_open, R.string.tweet_action_open, () -> listener.onClick(tweet)),
+                        new Action(R.id.tweet_action_reply, R.string.tweet_action_reply, () -> listener.onClickReply(tweet)),
+                        new Action(R.id.tweet_action_retweet, R.string.tweet_action_retweet, () -> listener.onClickRetweet(tweet))
                 )
         );
     }

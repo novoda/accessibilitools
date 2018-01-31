@@ -27,15 +27,10 @@ public class ActionsAlertDialogCreator {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setItems(
                 collateActionLabels(actions),
-                new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Action action = actions.getAction(which);
-                        action.run();
-                        dialog.dismiss();
-                    }
-
+                (dialog, actionId) -> {
+                    Action action = actions.getAction(actionId);
+                    action.run();
+                    dialog.dismiss();
                 }
         );
 
