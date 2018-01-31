@@ -31,22 +31,14 @@ public class Action {
     }
 
     public View.OnLongClickListener asLongClickListener() {
-        return new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                action.run();
-                return true;
-            }
+        return v -> {
+            action.run();
+            return true;
         };
     }
 
     public View.OnClickListener asClickListener() {
-        return new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                action.run();
-            }
-        };
+        return v -> action.run();
     }
 
     public void run() {
