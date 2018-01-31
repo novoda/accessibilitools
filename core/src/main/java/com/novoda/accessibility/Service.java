@@ -1,9 +1,12 @@
 package com.novoda.accessibility;
 
+import android.accessibilityservice.AccessibilityServiceInfo;
+import android.content.ComponentName;
+
 /**
- * An enumeration of all the known accessibility services and their fully qualified names.
+ * An enumeration of known accessibility services and their flattened {@link ComponentName}.
  * <p>
- * These are the values returned from android.accessibilityservice.AccessibilityServiceInfo#getId().
+ * These are the values returned from {@link AccessibilityServiceInfo#getId()}.
  */
 public enum Service {
 
