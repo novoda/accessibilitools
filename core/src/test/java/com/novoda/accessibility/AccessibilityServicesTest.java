@@ -33,7 +33,7 @@ public class AccessibilityServicesTest {
     @Test
     public void givenEnabledServicesListForSpokenFeedbackIsEmpty_thenReportsSpokenFeedbackIsDisabled() {
         given(accessibilityManager.getEnabledAccessibilityServiceList(FEEDBACK_SPOKEN))
-                .willReturn(Collections.<AccessibilityServiceInfo>emptyList());
+                .willReturn(Collections.emptyList());
 
         boolean spokenFeedbackEnabled = accessibilityServices.isSpokenFeedbackEnabled();
 
