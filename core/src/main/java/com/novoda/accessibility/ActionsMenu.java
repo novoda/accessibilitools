@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -117,12 +116,20 @@ class ActionsMenu implements Menu {
 
     @Override
     public void setGroupVisible(int group, boolean visible) {
-        throw new UnsupportedOperationException();
+        for (ActionMenuItem menuItem : menuItems) {
+            if (menuItem.getGroupId() == group) {
+                menuItem.setVisible(visible);
+            }
+        }
     }
 
     @Override
     public void setGroupEnabled(int group, boolean enabled) {
-        throw new UnsupportedOperationException();
+        for (ActionMenuItem menuItem : menuItems) {
+            if (menuItem.getGroupId() == group) {
+                menuItem.setEnabled(enabled);
+            }
+        }
     }
 
     @Override
