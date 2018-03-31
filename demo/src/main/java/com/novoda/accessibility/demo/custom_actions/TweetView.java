@@ -11,8 +11,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.novoda.accessibility.AccessibilityServices;
-import com.novoda.accessibility.Actions;
-import com.novoda.accessibility.ActionsAlertDialogCreator;
 import com.novoda.accessibility.ActionsMenuAccessibilityDelegate;
 import com.novoda.accessibility.ActionsMenuAlertDialog;
 import com.novoda.accessibility.ActionsMenuInflater;
@@ -23,6 +21,8 @@ public class TweetView extends LinearLayout {
     private TextView tweetTextView;
     private View replyButton;
     private View retweetButton;
+
+    private ActionsMenuInflater actionsMenuInflater;
     private AccessibilityServices services;
 
     public TweetView(Context context, AttributeSet attrs) {
@@ -33,6 +33,7 @@ public class TweetView extends LinearLayout {
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
+        actionsMenuInflater = new ActionsMenuInflater(getContext());
         services = AccessibilityServices.newInstance(getContext());
 
         View.inflate(getContext(), R.layout.merge_tweet, this);
@@ -42,14 +43,8 @@ public class TweetView extends LinearLayout {
     }
 
     public void display(String tweet, Listener listener) {
-        MenuItem.OnMenuItemClickListener menuItemClickListener = menuItemClickListener(tweet, listener);
-        Menu menu = ActionsMenuInflater.inflate(
-                getContext(),
-                R.menu.tweet_actions,
-                menuItemClickListener
-        );
-
-
+        MenuItem.OnMenuItemClickListener menuItemClickListener = createMenuItemClickListener(tweet, listener);
+        Menu menu = actionsMenuInflater.inflateMenu(R.menu.tweet_actions, menuItemClickListener);
         ActionsMenuAccessibilityDelegate delegate = new ActionsMenuAccessibilityDelegate(menu, menuItemClickListener);
 //      TODO: add composable delegate - delegate.setClickLabel(R.string.tweet_actions_usage_hint);
         ViewCompat.setAccessibilityDelegate(this, delegate);
@@ -64,7 +59,7 @@ public class TweetView extends LinearLayout {
         }
     }
 
-    private MenuItem.OnMenuItemClickListener menuItemClickListener(String tweet, Listener listener) {
+    private MenuItem.OnMenuItemClickListener createMenuItemClickListener(String tweet, Listener listener) {
         return (MenuItem item) -> {
             switch (item.getItemId()) {
                 case R.id.tweet_action_open:
