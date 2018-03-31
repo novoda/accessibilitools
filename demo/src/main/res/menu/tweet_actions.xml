@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@id/tweet_action_open"
+        android:title="@string/tweet_action_open" />
+
+    <item
+        android:id="@id/tweet_action_reply"
+        android:title="@string/tweet_action_reply" />
+
+    <item
+        android:id="@id/tweet_action_retweet"
+        android:title="@string/tweet_action_retweet" />
+</menu>

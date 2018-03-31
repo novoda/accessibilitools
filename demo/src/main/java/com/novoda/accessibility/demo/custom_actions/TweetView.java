@@ -4,22 +4,21 @@ import android.content.Context;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AlertDialog;
 import android.util.AttributeSet;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.novoda.accessibility.AccessibilityServices;
-import com.novoda.accessibility.Action;
 import com.novoda.accessibility.Actions;
-import com.novoda.accessibility.ActionsAccessibilityDelegate;
 import com.novoda.accessibility.ActionsAlertDialogCreator;
+import com.novoda.accessibility.ActionsMenuAccessibilityDelegate;
+import com.novoda.accessibility.ActionsMenuAlertDialog;
+import com.novoda.accessibility.ActionsMenuInflater;
 import com.novoda.accessibility.demo.R;
 
-import java.util.Arrays;
-
 public class TweetView extends LinearLayout {
-
-    private final ActionsAlertDialogCreator actionsAlertDialogCreator;
 
     private TextView tweetTextView;
     private View replyButton;
@@ -29,7 +28,6 @@ public class TweetView extends LinearLayout {
     public TweetView(Context context, AttributeSet attrs) {
         super(context, attrs);
         setOrientation(VERTICAL);
-        actionsAlertDialogCreator = new ActionsAlertDialogCreator(context, R.string.tweet_actions_title);
     }
 
     @Override
@@ -44,23 +42,49 @@ public class TweetView extends LinearLayout {
     }
 
     public void display(String tweet, Listener listener) {
-        Actions actions = createActions(tweet, listener);
-        ActionsAccessibilityDelegate delegate = new ActionsAccessibilityDelegate(getResources(), actions);
-        delegate.setClickLabel(R.string.tweet_actions_usage_hint);
+        MenuItem.OnMenuItemClickListener menuItemClickListener = menuItemClickListener(tweet, listener);
+        Menu menu = ActionsMenuInflater.inflate(
+                getContext(),
+                R.menu.tweet_actions,
+                menuItemClickListener
+        );
+
+
+        ActionsMenuAccessibilityDelegate delegate = new ActionsMenuAccessibilityDelegate(menu, menuItemClickListener);
+//      TODO: add composable delegate - delegate.setClickLabel(R.string.tweet_actions_usage_hint);
         ViewCompat.setAccessibilityDelegate(this, delegate);
 
         tweetTextView.setText(tweet);
 
         if (services.isSpokenFeedbackEnabled()) {
-            setClickListenerToShowDialogFor(actions);
+            AlertDialog alertDialog = ActionsMenuAlertDialog.create(getContext(), menu, menuItemClickListener).create();
+            setClickListenerToShow(alertDialog);
         } else {
             setIndividualClickListeners(tweet, listener);
         }
     }
 
-    private void setClickListenerToShowDialogFor(Actions actions) {
+    private MenuItem.OnMenuItemClickListener menuItemClickListener(String tweet, Listener listener) {
+        return (MenuItem item) -> {
+            switch (item.getItemId()) {
+                case R.id.tweet_action_open:
+                    listener.onClick(tweet);
+                    return true;
+                case R.id.tweet_action_reply:
+                    listener.onClickReply(tweet);
+                    return true;
+                case R.id.tweet_action_retweet:
+                    listener.onClickRetweet(tweet);
+                    return true;
+                default:
+                    throw new RuntimeException("Unhandled action: " + item.getTitle());
+            }
+        };
+    }
+
+    private void setClickListenerToShow(AlertDialog actionsDialog) {
         setButtonsAsClickableFalseToFixBehaviorChangeOnLollipopPlus();
-        setOnClickListener(v -> showAlertDialogFor(actions));
+        setOnClickListener(v -> actionsDialog.show());
     }
 
     private void setButtonsAsClickableFalseToFixBehaviorChangeOnLollipopPlus() {
@@ -73,21 +97,6 @@ public class TweetView extends LinearLayout {
         setOnClickListener(v -> listener.onClick(tweet));
         replyButton.setOnClickListener(v -> listener.onClickReply(tweet));
         retweetButton.setOnClickListener(v -> listener.onClickRetweet(tweet));
-    }
-
-    private Actions createActions(String tweet, Listener listener) {
-        return new Actions(
-                Arrays.asList(
-                        new Action(R.id.tweet_action_open, R.string.tweet_action_open, () -> listener.onClick(tweet)),
-                        new Action(R.id.tweet_action_reply, R.string.tweet_action_reply, () -> listener.onClickReply(tweet)),
-                        new Action(R.id.tweet_action_retweet, R.string.tweet_action_retweet, () -> listener.onClickRetweet(tweet))
-                )
-        );
-    }
-
-    private void showAlertDialogFor(Actions actions) {
-        AlertDialog dialog = actionsAlertDialogCreator.create(actions);
-        dialog.show();
     }
 
     public interface Listener {
