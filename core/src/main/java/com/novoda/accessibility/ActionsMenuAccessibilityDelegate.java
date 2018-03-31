@@ -1,31 +1,20 @@
 package com.novoda.accessibility;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.MenuRes;
 import android.support.v4.view.AccessibilityDelegateCompat;
 import android.support.v4.view.accessibility.AccessibilityNodeInfoCompat;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
 public class ActionsMenuAccessibilityDelegate extends AccessibilityDelegateCompat {
 
-    private final ActionsMenu menu;
+    private final Menu menu;
+    private final MenuItem.OnMenuItemClickListener menuItemClickListener;
 
-    public static ActionsMenuAccessibilityDelegate create(Context context, @MenuRes int menuRes, MenuItem.OnMenuItemClickListener menuItemClickListener) {
-        MenuInflater menuInflater = new MenuInflater(context);
-        ActionsMenu menu = new ActionsMenu(context.getResources());
-        for (int i = 0; i < menu.size(); i++) {
-            menu.getItem(i).setOnMenuItemClickListener(menuItemClickListener);
-        }
-        menuInflater.inflate(menuRes, menu);
-        return new ActionsMenuAccessibilityDelegate(menu);
-    }
-
-    private ActionsMenuAccessibilityDelegate(ActionsMenu menu) {
+    public ActionsMenuAccessibilityDelegate(Menu menu, MenuItem.OnMenuItemClickListener menuItemClickListener) {
         this.menu = menu;
+        this.menuItemClickListener = menuItemClickListener;
     }
 
     @Override
@@ -39,11 +28,11 @@ public class ActionsMenuAccessibilityDelegate extends AccessibilityDelegateCompa
 
     @Override
     public boolean performAccessibilityAction(View host, int actionId, Bundle args) {
-        ActionMenuItem item = menu.findItem(actionId);
+        MenuItem item = menu.findItem(actionId);
         if (item == null) {
             return super.performAccessibilityAction(host, actionId, args);
         } else {
-            item.invokeAction();
+            menuItemClickListener.onMenuItemClick(item);
             return true;
         }
     }
