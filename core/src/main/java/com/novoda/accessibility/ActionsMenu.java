@@ -24,22 +24,22 @@ class ActionsMenu implements Menu {
     }
 
     @Override
-    public MenuItem add(@StringRes int titleRes) {
+    public ActionMenuItem add(@StringRes int titleRes) {
         return add(resources.getString(titleRes));
     }
 
     @Override
-    public MenuItem add(CharSequence title) {
+    public ActionMenuItem add(CharSequence title) {
         throw new UnsupportedOperationException("Items without IDs explicitly set aren't supported.");
     }
 
     @Override
-    public MenuItem add(int groupId, int itemId, int order, @StringRes int titleRes) {
+    public ActionMenuItem add(int groupId, int itemId, int order, @StringRes int titleRes) {
         return add(groupId, itemId, order, resources.getString(titleRes));
     }
 
     @Override
-    public MenuItem add(int groupId, int itemId, int order, CharSequence title) {
+    public ActionMenuItem add(int groupId, int itemId, int order, CharSequence title) {
         if (itemId == 0 || menuItemsContainsItemWithId(itemId)) {
             throw new IllegalArgumentException("itemId for \"" + title + "\" is missing or matches another item in menu.");
         }
@@ -137,7 +137,7 @@ class ActionsMenu implements Menu {
 
     @Nullable
     @Override
-    public MenuItem findItem(int id) {
+    public ActionMenuItem findItem(int id) {
         for (ActionMenuItem menuItem : menuItems) {
             if (menuItem.getItemId() == id) {
                 return menuItem;
@@ -152,7 +152,7 @@ class ActionsMenu implements Menu {
     }
 
     @Override
-    public MenuItem getItem(int index) {
+    public ActionMenuItem getItem(int index) {
         return menuItems.get(index);
     }
 
@@ -173,8 +173,8 @@ class ActionsMenu implements Menu {
 
     @Override
     public boolean performIdentifierAction(int id, int flags) {
-        MenuItem menuItem = findItem(id);
-        return menuItem != null && ((ActionMenuItem) menuItem).invokeAction();
+        ActionMenuItem menuItem = findItem(id);
+        return menuItem != null && menuItem.invokeAction();
     }
 
     @Override

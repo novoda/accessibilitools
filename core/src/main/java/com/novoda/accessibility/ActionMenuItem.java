@@ -44,13 +44,13 @@ class ActionMenuItem implements MenuItem {
     }
 
     @Override
-    public MenuItem setTitle(CharSequence title) {
+    public ActionMenuItem setTitle(CharSequence title) {
         this.title = title;
         return this;
     }
 
     @Override
-    public MenuItem setTitle(@StringRes int title) {
+    public ActionMenuItem setTitle(@StringRes int title) {
         setTitle(resources.getString(title));
         return this;
     }
@@ -61,7 +61,7 @@ class ActionMenuItem implements MenuItem {
     }
 
     @Override
-    public MenuItem setTitleCondensed(@Nullable CharSequence title) {
+    public ActionMenuItem setTitleCondensed(@Nullable CharSequence title) {
         if (title != null) {
             throw new UnsupportedOperationException();
         }
@@ -74,12 +74,12 @@ class ActionMenuItem implements MenuItem {
     }
 
     @Override
-    public MenuItem setIcon(Drawable icon) {
+    public ActionMenuItem setIcon(Drawable icon) {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public MenuItem setIcon(int iconRes) {
+    public ActionMenuItem setIcon(int iconRes) {
         if (iconRes != 0) {
             throw new UnsupportedOperationException();
         }
@@ -92,7 +92,7 @@ class ActionMenuItem implements MenuItem {
     }
 
     @Override
-    public MenuItem setIntent(Intent intent) {
+    public ActionMenuItem setIntent(Intent intent) {
         throw new UnsupportedOperationException();
     }
 
@@ -102,12 +102,12 @@ class ActionMenuItem implements MenuItem {
     }
 
     @Override
-    public MenuItem setShortcut(char numericChar, char alphaChar) {
+    public ActionMenuItem setShortcut(char numericChar, char alphaChar) {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public MenuItem setNumericShortcut(char numericChar) {
+    public ActionMenuItem setNumericShortcut(char numericChar) {
         Log.w("!!!", "setNumericShortcut(char) is not supported but is called by MenuInflater");
         return this;
     }
@@ -118,7 +118,7 @@ class ActionMenuItem implements MenuItem {
     }
 
     @Override
-    public MenuItem setAlphabeticShortcut(char alphaChar) {
+    public ActionMenuItem setAlphabeticShortcut(char alphaChar) {
         Log.w("!!!", "setAlphabeticShortcut(char) is not supported but is called by MenuInflater");
         return this;
     }
@@ -129,7 +129,7 @@ class ActionMenuItem implements MenuItem {
     }
 
     @Override
-    public MenuItem setCheckable(boolean checkable) {
+    public ActionMenuItem setCheckable(boolean checkable) {
         if (checkable) {
             throw new UnsupportedOperationException();
         }
@@ -142,7 +142,7 @@ class ActionMenuItem implements MenuItem {
     }
 
     @Override
-    public MenuItem setChecked(boolean checked) {
+    public ActionMenuItem setChecked(boolean checked) {
         if (checked) {
             throw new UnsupportedOperationException();
         }
@@ -155,7 +155,7 @@ class ActionMenuItem implements MenuItem {
     }
 
     @Override
-    public MenuItem setVisible(boolean visible) {
+    public ActionMenuItem setVisible(boolean visible) {
         if (!visible) {
             throw new UnsupportedOperationException();
         }
@@ -171,7 +171,7 @@ class ActionMenuItem implements MenuItem {
     }
 
     @Override
-    public MenuItem setEnabled(boolean enabled) {
+    public ActionMenuItem setEnabled(boolean enabled) {
         this.enabled = enabled;
         return this;
     }
@@ -193,7 +193,7 @@ class ActionMenuItem implements MenuItem {
     }
 
     @Override
-    public MenuItem setOnMenuItemClickListener(OnMenuItemClickListener menuItemClickListener) {
+    public ActionMenuItem setOnMenuItemClickListener(OnMenuItemClickListener menuItemClickListener) {
         this.menuItemClickListener = menuItemClickListener;
         return this;
     }
@@ -210,17 +210,17 @@ class ActionMenuItem implements MenuItem {
     }
 
     @Override
-    public MenuItem setShowAsActionFlags(int actionEnum) {
+    public ActionMenuItem setShowAsActionFlags(int actionEnum) {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public MenuItem setActionView(View view) {
+    public ActionMenuItem setActionView(View view) {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public MenuItem setActionView(int resId) {
+    public ActionMenuItem setActionView(int resId) {
         throw new UnsupportedOperationException();
     }
 
@@ -230,7 +230,7 @@ class ActionMenuItem implements MenuItem {
     }
 
     @Override
-    public MenuItem setActionProvider(ActionProvider actionProvider) {
+    public ActionMenuItem setActionProvider(ActionProvider actionProvider) {
         throw new UnsupportedOperationException();
     }
 
@@ -256,7 +256,7 @@ class ActionMenuItem implements MenuItem {
     }
 
     @Override
-    public MenuItem setOnActionExpandListener(OnActionExpandListener listener) {
+    public ActionMenuItem setOnActionExpandListener(OnActionExpandListener listener) {
         throw new UnsupportedOperationException();
     }
 
