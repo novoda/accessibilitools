@@ -264,10 +264,6 @@ class ActionMenuItem implements MenuItem {
      * Returns true if action was invoked, else false.
      */
     boolean invokeAction() {
-        if (isEnabled() && menuItemClickListener != null) {
-            menuItemClickListener.onMenuItemClick(this);
-            return true;
-        }
-        return false;
+        return isEnabled() && menuItemClickListener != null && menuItemClickListener.onMenuItemClick(this);
     }
 }

@@ -32,8 +32,7 @@ public class ActionsMenuAccessibilityDelegate extends AccessibilityDelegateCompa
         if (item == null) {
             return super.performAccessibilityAction(host, actionId, args);
         } else {
-            menuItemClickListener.onMenuItemClick(item);
-            return true;
+            return menuItemClickListener.onMenuItemClick(item);
         }
     }
 }
