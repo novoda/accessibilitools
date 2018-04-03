@@ -33,7 +33,7 @@ public class TweetView extends LinearLayout {
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-        actionsMenuInflater = new ActionsMenuInflater(getContext());
+        actionsMenuInflater = ActionsMenuInflater.from(getContext());
         services = AccessibilityServices.newInstance(getContext());
 
         View.inflate(getContext(), R.layout.merge_tweet, this);
@@ -44,7 +44,7 @@ public class TweetView extends LinearLayout {
 
     public void display(String tweet, Listener listener) {
         MenuItem.OnMenuItemClickListener menuItemClickListener = createMenuItemClickListener(tweet, listener);
-        Menu menu = actionsMenuInflater.inflateMenu(R.menu.tweet_actions, menuItemClickListener);
+        Menu menu = actionsMenuInflater.inflate(R.menu.tweet_actions, menuItemClickListener);
         ActionsMenuAccessibilityDelegate delegate = new ActionsMenuAccessibilityDelegate(menu, menuItemClickListener);
 //      TODO: add composable delegate - delegate.setClickLabel(R.string.tweet_actions_usage_hint);
         ViewCompat.setAccessibilityDelegate(this, delegate);

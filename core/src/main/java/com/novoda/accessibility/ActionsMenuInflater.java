@@ -12,16 +12,18 @@ public class ActionsMenuInflater {
     private final MenuInflater menuInflater;
     private final Resources resources;
 
-    public ActionsMenuInflater(Context context) {
-        this(new MenuInflater(context), context.getResources());
+    public static ActionsMenuInflater from(Context context) {
+        MenuInflater menuInflater = new MenuInflater(context);
+        Resources resources = context.getResources();
+        return new ActionsMenuInflater(menuInflater, resources);
     }
 
-    ActionsMenuInflater(MenuInflater menuInflater, Resources resources) {
+    private ActionsMenuInflater(MenuInflater menuInflater, Resources resources) {
         this.menuInflater = menuInflater;
         this.resources = resources;
     }
 
-    public Menu inflateMenu(@MenuRes int menuRes, MenuItem.OnMenuItemClickListener menuItemClickListener) {
+    public Menu inflate(@MenuRes int menuRes, MenuItem.OnMenuItemClickListener menuItemClickListener) {
         ActionsMenu menu = new ActionsMenu(resources);
         for (int i = 0; i < menu.size(); i++) {
             menu.getItem(i).setOnMenuItemClickListener(menuItemClickListener);
