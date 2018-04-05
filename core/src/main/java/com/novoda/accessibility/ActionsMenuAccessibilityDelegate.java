@@ -1,5 +1,6 @@
 package com.novoda.accessibility;
 
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.view.AccessibilityDelegateCompat;
 import android.support.v4.view.accessibility.AccessibilityNodeInfoCompat;
@@ -11,10 +12,16 @@ public class ActionsMenuAccessibilityDelegate extends AccessibilityDelegateCompa
 
     private final Menu menu;
     private final MenuItem.OnMenuItemClickListener menuItemClickListener;
+    private final UsageHints usageHints;
 
-    public ActionsMenuAccessibilityDelegate(Menu menu, MenuItem.OnMenuItemClickListener menuItemClickListener) {
+    public ActionsMenuAccessibilityDelegate(Resources resources, Menu menu, MenuItem.OnMenuItemClickListener menuItemClickListener) {
+        this(menu, menuItemClickListener, new UsageHints(resources));
+    }
+
+    public ActionsMenuAccessibilityDelegate(Menu menu, MenuItem.OnMenuItemClickListener menuItemClickListener, UsageHints usageHints) {
         this.menu = menu;
         this.menuItemClickListener = menuItemClickListener;
+        this.usageHints = usageHints;
     }
 
     @Override
@@ -24,6 +31,7 @@ public class ActionsMenuAccessibilityDelegate extends AccessibilityDelegateCompa
             MenuItem item = menu.getItem(i);
             info.addAction(new AccessibilityNodeInfoCompat.AccessibilityActionCompat(item.getItemId(), item.getTitle()));
         }
+        usageHints.addClickEventUsageHints(host, info);
     }
 
     @Override
