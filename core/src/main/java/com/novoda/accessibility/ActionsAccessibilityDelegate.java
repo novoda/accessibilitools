@@ -2,6 +2,7 @@ package com.novoda.accessibility;
 
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.support.annotation.StringRes;
 import android.support.v4.view.AccessibilityDelegateCompat;
 import android.support.v4.view.accessibility.AccessibilityNodeInfoCompat;
 import android.view.View;
@@ -20,6 +21,46 @@ public class ActionsAccessibilityDelegate extends AccessibilityDelegateCompat {
         this.resources = resources;
         this.actions = actions;
         this.usageHints = usageHints;
+    }
+
+    /**
+     * Label describing the action that will be performed on click
+     *
+     * @deprecated Create UsageHints explicitly and pass via the constructor.
+     */
+    @Deprecated
+    public void setClickLabel(@StringRes int clickLabel) {
+        usageHints.setClickLabel(clickLabel);
+    }
+
+    /**
+     * Label describing the action that will be performed on click
+     *
+     * @deprecated Create UsageHints explicitly and pass via the constructor.
+     */
+    @Deprecated
+    public void setClickLabel(CharSequence clickLabel) {
+        usageHints.setClickLabel(clickLabel);
+    }
+
+    /**
+     * Label describing the action that will be performed on long click
+     *
+     * @deprecated Create UsageHints explicitly and pass via the constructor.
+     */
+    @Deprecated
+    public void setLongClickLabel(@StringRes int longClickLabel) {
+        usageHints.setLongClickLabel(longClickLabel);
+    }
+
+    /**
+     * Label describing the action that will be performed on long click
+     *
+     * @deprecated Create UsageHints explicitly and pass via the constructor.
+     */
+    @Deprecated
+    public void setLongClickLabel(CharSequence longClickLabel) {
+        usageHints.setLongClickLabel(longClickLabel);
     }
 
     @Override
