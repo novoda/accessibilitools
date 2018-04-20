@@ -11,44 +11,56 @@ public class ActionsAccessibilityDelegate extends AccessibilityDelegateCompat {
 
     private final Resources resources;
     private final Actions actions;
-    private final UsageHintsAccessibilityDelegate usageHintsAccessibilityDelegate;
+    private final UsageHints usageHints;
 
     public ActionsAccessibilityDelegate(Resources resources, Actions actions) {
-        this(resources, actions, new UsageHintsAccessibilityDelegate(resources));
+        this(resources, actions, new UsageHints(resources));
     }
 
-    public ActionsAccessibilityDelegate(Resources resources, Actions actions, UsageHintsAccessibilityDelegate usageHintsAccessibilityDelegate) {
+    public ActionsAccessibilityDelegate(Resources resources, Actions actions, UsageHints usageHints) {
         this.resources = resources;
         this.actions = actions;
-        this.usageHintsAccessibilityDelegate = usageHintsAccessibilityDelegate;
+        this.usageHints = usageHints;
     }
 
     /**
      * Label describing the action that will be performed on click
+     *
+     * @deprecated Create UsageHints explicitly and pass via the constructor.
      */
+    @Deprecated
     public void setClickLabel(@StringRes int clickLabel) {
-        usageHintsAccessibilityDelegate.setClickLabel(clickLabel);
+        usageHints.setClickLabel(clickLabel);
     }
 
     /**
      * Label describing the action that will be performed on click
+     *
+     * @deprecated Create UsageHints explicitly and pass via the constructor.
      */
+    @Deprecated
     public void setClickLabel(CharSequence clickLabel) {
-        usageHintsAccessibilityDelegate.setClickLabel(clickLabel);
+        usageHints.setClickLabel(clickLabel);
     }
 
     /**
      * Label describing the action that will be performed on long click
+     *
+     * @deprecated Create UsageHints explicitly and pass via the constructor.
      */
+    @Deprecated
     public void setLongClickLabel(@StringRes int longClickLabel) {
-        usageHintsAccessibilityDelegate.setLongClickLabel(longClickLabel);
+        usageHints.setLongClickLabel(longClickLabel);
     }
 
     /**
      * Label describing the action that will be performed on long click
+     *
+     * @deprecated Create UsageHints explicitly and pass via the constructor.
      */
+    @Deprecated
     public void setLongClickLabel(CharSequence longClickLabel) {
-        usageHintsAccessibilityDelegate.setLongClickLabel(longClickLabel);
+        usageHints.setLongClickLabel(longClickLabel);
     }
 
     @Override
@@ -58,8 +70,7 @@ public class ActionsAccessibilityDelegate extends AccessibilityDelegateCompat {
             String label = resources.getString(action.getLabel());
             info.addAction(new AccessibilityNodeInfoCompat.AccessibilityActionCompat(action.getId(), label));
         }
-
-        usageHintsAccessibilityDelegate.onInitializeAccessibilityNodeInfo(host, info);
+        usageHints.addClickEventUsageHints(host, info);
     }
 
     @Override

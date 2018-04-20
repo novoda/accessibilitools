@@ -6,68 +6,45 @@ import android.support.v4.view.AccessibilityDelegateCompat;
 import android.support.v4.view.accessibility.AccessibilityNodeInfoCompat;
 import android.view.View;
 
-import static android.support.v4.view.accessibility.AccessibilityNodeInfoCompat.ACTION_CLICK;
-import static android.support.v4.view.accessibility.AccessibilityNodeInfoCompat.ACTION_LONG_CLICK;
-
 public class UsageHintsAccessibilityDelegate extends AccessibilityDelegateCompat {
 
-    private final Resources resources;
-    private CharSequence clickLabel = null;
-    private CharSequence longClickLabel = null;
+    private final UsageHints usageHints;
 
     public UsageHintsAccessibilityDelegate(Resources resources) {
-        this.resources = resources;
+        this.usageHints = new UsageHints(resources);
     }
 
     /**
      * Label describing the action that will be performed on click
      */
     public void setClickLabel(@StringRes int clickLabel) {
-        setClickLabel(resources.getString(clickLabel));
+        usageHints.setClickLabel(clickLabel);
     }
 
     /**
      * Label describing the action that will be performed on click
      */
     public void setClickLabel(CharSequence clickLabel) {
-        this.clickLabel = clickLabel;
+        usageHints.setClickLabel(clickLabel);
     }
 
     /**
      * Label describing the action that will be performed on long click
      */
     public void setLongClickLabel(@StringRes int longClickLabel) {
-        setLongClickLabel(resources.getString(longClickLabel));
+        usageHints.setLongClickLabel(longClickLabel);
     }
 
     /**
      * Label describing the action that will be performed on long click
      */
     public void setLongClickLabel(CharSequence longClickLabel) {
-        this.longClickLabel = longClickLabel;
+        usageHints.setLongClickLabel(longClickLabel);
     }
 
     @Override
     public void onInitializeAccessibilityNodeInfo(View host, AccessibilityNodeInfoCompat info) {
         super.onInitializeAccessibilityNodeInfo(host, info);
-
-        addCustomDescriptionForClickEventIfNecessary(host, info);
-        addCustomDescriptionForLongClickEventIfNecessary(host, info);
-    }
-
-    private void addCustomDescriptionForClickEventIfNecessary(View host, AccessibilityNodeInfoCompat info) {
-        if (!host.isClickable() || clickLabel == null) {
-            return;
-        }
-
-        info.addAction(new AccessibilityNodeInfoCompat.AccessibilityActionCompat(ACTION_CLICK, clickLabel));
-    }
-
-    private void addCustomDescriptionForLongClickEventIfNecessary(View host, AccessibilityNodeInfoCompat info) {
-        if (!host.isLongClickable() || longClickLabel == null) {
-            return;
-        }
-
-        info.addAction(new AccessibilityNodeInfoCompat.AccessibilityActionCompat(ACTION_LONG_CLICK, longClickLabel));
+        usageHints.addClickEventUsageHints(host, info);
     }
 }
