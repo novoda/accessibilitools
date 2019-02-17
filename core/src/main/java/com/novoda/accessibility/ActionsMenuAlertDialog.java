@@ -1,9 +1,10 @@
 package com.novoda.accessibility;
 
 import android.content.Context;
-import androidx.appcompat.app.AlertDialog;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import androidx.appcompat.app.AlertDialog;
 
 public class ActionsMenuAlertDialog {
 

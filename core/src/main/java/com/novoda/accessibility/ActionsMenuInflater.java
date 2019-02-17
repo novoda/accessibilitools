@@ -2,10 +2,11 @@ package com.novoda.accessibility;
 
 import android.content.Context;
 import android.content.res.Resources;
-import androidx.annotation.MenuRes;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+
+import androidx.annotation.MenuRes;
 
 public class ActionsMenuInflater {
 

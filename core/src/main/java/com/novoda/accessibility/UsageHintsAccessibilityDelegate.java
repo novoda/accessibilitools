@@ -1,10 +1,11 @@
 package com.novoda.accessibility;
 
 import android.content.res.Resources;
+import android.view.View;
+
 import androidx.annotation.StringRes;
 import androidx.core.view.AccessibilityDelegateCompat;
 import androidx.core.view.accessibility.AccessibilityNodeInfoCompat;
-import android.view.View;
 
 public class UsageHintsAccessibilityDelegate extends AccessibilityDelegateCompat {
 

@@ -1,9 +1,10 @@
 package com.novoda.accessibility;
 
 import android.content.res.Resources;
+import android.view.View;
+
 import androidx.annotation.StringRes;
 import androidx.core.view.accessibility.AccessibilityNodeInfoCompat;
-import android.view.View;
 
 import static androidx.core.view.accessibility.AccessibilityNodeInfoCompat.ACTION_CLICK;
 import static androidx.core.view.accessibility.AccessibilityNodeInfoCompat.ACTION_LONG_CLICK;

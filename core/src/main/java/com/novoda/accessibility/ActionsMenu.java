@@ -3,12 +3,13 @@ package com.novoda.accessibility;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.res.Resources;
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
+
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -3,10 +3,15 @@ package com.novoda.accessibility;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
+import android.view.ActionProvider;
+import android.view.ContextMenu;
+import android.view.MenuItem;
+import android.view.SubMenu;
+import android.view.View;
+
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
-import android.util.Log;
-import android.view.*;
 
 class ActionMenuItem implements MenuItem {
 

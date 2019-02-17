@@ -1,8 +1,9 @@
 package com.novoda.accessibility;
 
+import android.view.View;
+
 import androidx.annotation.IdRes;
 import androidx.annotation.StringRes;
-import android.view.View;
 
 public class Action {
 
