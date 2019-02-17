@@ -1,7 +1,7 @@
 package com.novoda.accessibility;
 
-import android.support.annotation.IdRes;
-import android.support.annotation.Nullable;
+import androidx.annotation.IdRes;
+import androidx.annotation.Nullable;
 
 import java.util.Iterator;
 import java.util.List;

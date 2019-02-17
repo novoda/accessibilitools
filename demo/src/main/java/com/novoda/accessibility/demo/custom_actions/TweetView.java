@@ -1,16 +1,22 @@
 package com.novoda.accessibility.demo.custom_actions;
 
 import android.content.Context;
-import android.support.v4.view.AccessibilityDelegateCompat;
-import android.support.v4.view.ViewCompat;
-import android.support.v7.app.AlertDialog;
 import android.util.AttributeSet;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import com.novoda.accessibility.*;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.view.AccessibilityDelegateCompat;
+import androidx.core.view.ViewCompat;
+
+import com.novoda.accessibility.AccessibilityServices;
+import com.novoda.accessibility.ActionsMenuAccessibilityDelegate;
+import com.novoda.accessibility.ActionsMenuAlertDialog;
+import com.novoda.accessibility.ActionsMenuInflater;
+import com.novoda.accessibility.UsageHints;
 import com.novoda.accessibility.demo.R;
 
 public class TweetView extends LinearLayout {

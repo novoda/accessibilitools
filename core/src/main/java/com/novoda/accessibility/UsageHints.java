@@ -1,12 +1,13 @@
 package com.novoda.accessibility;
 
 import android.content.res.Resources;
-import android.support.annotation.StringRes;
-import android.support.v4.view.accessibility.AccessibilityNodeInfoCompat;
 import android.view.View;
 
-import static android.support.v4.view.accessibility.AccessibilityNodeInfoCompat.ACTION_CLICK;
-import static android.support.v4.view.accessibility.AccessibilityNodeInfoCompat.ACTION_LONG_CLICK;
+import androidx.annotation.StringRes;
+import androidx.core.view.accessibility.AccessibilityNodeInfoCompat;
+
+import static androidx.core.view.accessibility.AccessibilityNodeInfoCompat.ACTION_CLICK;
+import static androidx.core.view.accessibility.AccessibilityNodeInfoCompat.ACTION_LONG_CLICK;
 
 public class UsageHints {
 

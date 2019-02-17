@@ -1,21 +1,20 @@
 ext {
     versions = [
-            androidSdk    : [
-                    compile   : 27,
-                    min       : 16,
-                    target    : 27,
-                    buildTools: '27.0.3'
+            androidSdk: [
+                    compile: 28,
+                    min    : 16,
+                    target : 28
             ]
     ]
 
     libraries = [
-            build             : [
-                    androidGradle : 'com.android.tools.build:gradle:3.0.1',
+            build         : [
+                    androidGradle : 'com.android.tools.build:gradle:3.3.1',
                     bintrayRelease: 'com.novoda:bintray-release:0.8.0'
             ],
-            assertJAndroid    : 'com.squareup.assertj:assertj-android:1.1.0',
-            jUnit             : 'junit:junit:4.12',
-            supportAppCompatV7: 'com.android.support:appcompat-v7:27.0.2',
-            mockitoCore       : 'org.mockito:mockito-core:2.13.0'
+            appcompat     : 'androidx.appcompat:appcompat:1.0.0',
+            assertJAndroid: 'com.squareup.assertj:assertj-android:1.1.0',
+            jUnit         : 'junit:junit:4.12',
+            mockitoCore   : 'org.mockito:mockito-core:2.13.0'
     ]
 }
