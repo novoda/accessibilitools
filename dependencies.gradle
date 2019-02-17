@@ -3,14 +3,13 @@ ext {
             androidSdk    : [
                     compile   : 27,
                     min       : 16,
-                    target    : 27,
-                    buildTools: '27.0.3'
+                    target    : 27
             ]
     ]
 
     libraries = [
             build             : [
-                    androidGradle : 'com.android.tools.build:gradle:3.0.1',
+                    androidGradle : 'com.android.tools.build:gradle:3.3.1',
                     bintrayRelease: 'com.novoda:bintray-release:0.8.0'
             ],
             assertJAndroid    : 'com.squareup.assertj:assertj-android:1.1.0',
