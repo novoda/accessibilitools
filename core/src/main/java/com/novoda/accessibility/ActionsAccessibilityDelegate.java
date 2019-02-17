@@ -2,9 +2,9 @@ package com.novoda.accessibility;
 
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.support.annotation.StringRes;
-import android.support.v4.view.AccessibilityDelegateCompat;
-import android.support.v4.view.accessibility.AccessibilityNodeInfoCompat;
+import androidx.annotation.StringRes;
+import androidx.core.view.AccessibilityDelegateCompat;
+import androidx.core.view.accessibility.AccessibilityNodeInfoCompat;
 import android.view.View;
 
 public class ActionsAccessibilityDelegate extends AccessibilityDelegateCompat {

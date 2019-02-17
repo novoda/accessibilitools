@@ -19,5 +19,5 @@ android {
 
 dependencies {
     implementation project(':core')
-    implementation libraries.supportAppCompatV7
+    implementation libraries.appcompat
 }
