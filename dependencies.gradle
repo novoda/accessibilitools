@@ -12,7 +12,7 @@ ext {
                     androidGradle : 'com.android.tools.build:gradle:3.3.1',
                     bintrayRelease: 'com.novoda:bintray-release:0.8.0'
             ],
-            appcompat     : 'androidx.appcompat:appcompat:1.0.0',
+            appcompat     : 'androidx.appcompat:appcompat:1.1.0-beta01',
             assertJAndroid: 'com.squareup.assertj:assertj-android:1.1.0',
             jUnit         : 'junit:junit:4.12',
             mockitoCore   : 'org.mockito:mockito-core:2.13.0'

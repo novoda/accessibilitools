@@ -17,6 +17,12 @@ public class CustomActionsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_custom_actions);
 
         TweetView tweetView = findViewById(R.id.tweet);
+        bindData(tweetView);
+        // testing double bind (this shouldn't result in double actions)
+        bindData(tweetView);
+    }
+
+    private void bindData(TweetView tweetView) {
         tweetView.display(
                 "This is a tweet lol",
                 new TweetView.Listener() {
