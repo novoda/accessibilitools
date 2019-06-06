@@ -13,10 +13,12 @@ import androidx.core.view.AccessibilityDelegateCompat;
 import androidx.core.view.ViewCompat;
 
 import com.novoda.accessibility.AccessibilityServices;
+import com.novoda.accessibility.ActionsAlertDialogCreator;
 import com.novoda.accessibility.ActionsMenuAccessibilityDelegate;
 import com.novoda.accessibility.ActionsMenuAlertDialog;
 import com.novoda.accessibility.ActionsMenuInflater;
 import com.novoda.accessibility.UsageHints;
+import com.novoda.accessibility.UsageHintsAccessibilityDelegate;
 import com.novoda.accessibility.demo.R;
 
 public class TweetView extends LinearLayout {
@@ -57,11 +59,20 @@ public class TweetView extends LinearLayout {
         setContentDescription(tweet);
         tweetTextView.setText(tweet);
 
+        setOnClickListener(v -> {
+            if (services.isSpokenFeedbackEnabled()) {
+                AlertDialog alertDialog = ActionsMenuAlertDialog.create(getContext(), menu, menuItemClickListener).create();
+                alertDialog.show();
+            } else {
+                listener.onClick(tweet);
+            }
+        });
+
         if (services.isSpokenFeedbackEnabled()) {
-            AlertDialog alertDialog = ActionsMenuAlertDialog.create(getContext(), menu, menuItemClickListener).create();
-            setClickListenerToShow(alertDialog);
+            setButtonsAsClickableFalseToFixBehaviorChangeOnLollipopPlus();
         } else {
-            setIndividualClickListeners(tweet, listener);
+            replyButton.setOnClickListener(v -> listener.onClickReply(tweet));
+            retweetButton.setOnClickListener(v -> listener.onClickRetweet(tweet));
         }
     }
 
@@ -83,21 +94,56 @@ public class TweetView extends LinearLayout {
         };
     }
 
-    private void setClickListenerToShow(AlertDialog actionsDialog) {
-        setButtonsAsClickableFalseToFixBehaviorChangeOnLollipopPlus();
-        setOnClickListener(v -> actionsDialog.show());
+    public void displaySimpler(String tweet, Listener listener) {
+        /* begin region: stuff you can do in all cases */
+        UsageHintsAccessibilityDelegate accessibilityDelegate = new UsageHintsAccessibilityDelegate(getResources());
+        accessibilityDelegate.setClickLabel(R.string.tweet_actions_usage_hint);
+        ViewCompat.setAccessibilityDelegate(this, accessibilityDelegate);
+
+        setContentDescription(tweet);
+        tweetTextView.setText(tweet);
+
+        CharSequence openLabel = getResources().getString(R.string.tweet_action_open);
+        ViewCompat.addAccessibilityAction(this, openLabel, (view, arguments) -> {
+            listener.onClick(tweet);
+            return true;
+        });
+
+        CharSequence replyLabel = getResources().getString(R.string.tweet_action_reply);
+        ViewCompat.addAccessibilityAction(this, replyLabel, (view, arguments) -> {
+            listener.onClickReply(tweet);
+            return true;
+        });
+
+        CharSequence retweetLabel = getResources().getString(R.string.tweet_action_retweet);
+        ViewCompat.addAccessibilityAction(this, retweetLabel, (view, arguments) -> {
+            listener.onClickRetweet(tweet);
+            return true;
+        });
+        /* end region: stuff you can do in all cases */
+
+        setOnClickListener(v -> {
+//            if (services.isSpokenFeedbackEnabled()) {
+                // this needs to be done _after_ the accessibility actions have been set on this View
+                AlertDialog alertDialog = new ActionsAlertDialogCreator(getContext()).create(this);
+                alertDialog.show();
+//            } else {
+//                listener.onClick(tweet);
+//            }
+        });
+
+//        if (services.isSpokenFeedbackEnabled()) {
+            setButtonsAsClickableFalseToFixBehaviorChangeOnLollipopPlus();
+//        } else {
+//            replyButton.setOnClickListener(v -> listener.onClickReply(tweet));
+//            retweetButton.setOnClickListener(v -> listener.onClickRetweet(tweet));
+//        }
     }
 
     private void setButtonsAsClickableFalseToFixBehaviorChangeOnLollipopPlus() {
         // https://code.google.com/p/android/issues/detail?id=205431
         replyButton.setClickable(false);
         retweetButton.setClickable(false);
-    }
-
-    private void setIndividualClickListeners(String tweet, Listener listener) {
-        setOnClickListener(v -> listener.onClick(tweet));
-        replyButton.setOnClickListener(v -> listener.onClickReply(tweet));
-        retweetButton.setOnClickListener(v -> listener.onClickRetweet(tweet));
     }
 
     public interface Listener {
