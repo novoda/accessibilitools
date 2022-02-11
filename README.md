@@ -1,3 +1,5 @@
+# 🛑 THIS REPOSITORY IS OFFICIALLY NO LONGER UNDER MAINTENANCE since 10/02/2022 🛑
+
 # accessibilitools [![Build](https://ci.novoda.com/buildStatus/icon?job=accessibilitools)](https://ci.novoda.com/job/accessibilitools/lastBuild/console) [![Download](https://api.bintray.com/packages/novoda/maven/accessibilitools/images/download.svg)](https://bintray.com/novoda/maven/accessibilitools/_latestVersion) [![License](https://raw.githubusercontent.com/novoda/novoda/master/assets/btn_apache_lisence.png)](LICENSE.txt)
 
 EZ tools to help make your app accessible.
